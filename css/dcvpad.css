@@ -1,0 +1,229 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	background: url(../visuels/bg_HD.jpg) no-repeat center fixed; 
+	background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-webkit-background-size: cover;
+}
+.ui-panel {
+	background: #333;
+	background-image: linear-gradient(to bottom, #333, #000);
+}
+.transpcont {
+    background: #333;
+	background-color: rgba(60,60,60,0.6);
+}
+.ui-overlay-c, .ui-page-theme-c, .ui-page-theme-c .ui-panel-wrapper, .header, .footer {
+	background: url(../visuels/bg_HD.jpg) no-repeat center fixed; 
+	background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-webkit-background-size: cover;
+}
+.ui-page-theme-c .ui-body-inherit {
+	background: url(../visuels/bg_HD_inputs.jpg) no-repeat center fixed; 
+	background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-webkit-background-size: cover;
+}
+@media all and (orientation: landscape) { 
+	body {
+		background: url(../visuels/bg_land_HD.jpg) no-repeat center fixed; 
+		background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		-webkit-background-size: cover;
+	}
+	.ui-overlay-c, .ui-page-theme-c, .ui-page-theme-c .ui-panel-wrapper, .header, .footer {
+		background: url(../visuels/bg_land_HD.jpg) no-repeat center fixed; 
+		background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		-webkit-background-size: cover;
+	}
+	.ui-page-theme-c .ui-body-inherit {
+		background: url(../visuels/bg_land_HD_inputs.jpg) no-repeat center fixed; 
+		background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		-webkit-background-size: cover;
+	}
+}
+#search-box, #book-box {
+	display: none;
+}
+p, h1, h2, h3, h4, h5, h6 {
+	margin: 0px;
+	padding: 0px;
+}
+a {
+	text-decoration: none;
+}
+ul, li {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+.cleaner {
+	clear: both;
+	height: 1px;
+	overflow: hidden;
+}
+.spacer {
+	clear: both;
+	height: 6px;
+	overflow: hidden;
+}
+.rounded {
+	-moz-border-radius: 6px;
+	border-radius: 6px;	
+}
+.rounded16 {
+	-moz-border-radius: 16px;
+	border-radius: 16px;
+}
+.shadow {
+	box-shadow: 0 0 6px #000;
+	-moz-box-shadow: 0 0 6px #000; 
+	-webkit-box-shadow: 0 0 6px #000;
+}
+.cursor {
+	cursor: pointer;
+}
+#left {
+	color: #FFF;
+}
+#wrap {
+	color: #333;
+	background-color: #EEE;
+	box-shadow: 0 0 2px #333;
+	-moz-box-shadow: 0 0 2px #333; 
+	-webkit-box-shadow: 0 0 2px #333;
+	padding: 6px;
+	margin-top: 36px;
+	width: 60%;
+	font-weight: bolder;
+	font-size: 21px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+#map, #follow_map, #fleet_map {
+	position:absolute;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+}
+.wait {
+	z-index: 100;
+}
+#footer_map {
+	text-align: center;
+}
+.cancel {
+	width: 96%;
+}
+.rounded {
+	-moz-border-radius: 6px;
+	border-radius: 6px;	
+}
+.rounded16 {
+	-moz-border-radius: 16px;
+	border-radius: 16px;
+}
+.shadow {
+	box-shadow: 0 0 6px #000;
+	-moz-box-shadow: 0 0 6px #000; 
+	-webkit-box-shadow: 0 0 6px #000;
+}
+/* Stack all blocks to start */
+.responsive .ui-block-a,
+.responsive .ui-block-b{
+    width: 100%;
+    float: none;
+}
+/* Stack all blocks to start */
+.responsive .ui-block-b{
+	display: none;
+}
+/* Collapsing borders */
+.responsive > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float A and B, leave A full width on top */
+@media all and (min-width: 1024px) {
+    .responsive {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+	.responsive .ui-block-b{
+		display: inline-block;
+	}
+    .responsive .ui-body {
+       min-height: 14em;
+    }
+    .responsive .ui-block-a,
+    .responsive .ui-block-b {
+      float: left;
+      width: 49.95%;
+    }
+    .responsive > div + div .ui-body {
+        border-top-width: 1px;
+    }
+    .responsive > div:first-child .ui-body {
+        border-bottom-width: 0;
+    }
+    .responsive > div:last-child .ui-body {
+        border-left-width: 0;
+    }
+}
+ul.popers a {
+	display: inline;
+}
+.expends, .expends2 {
+	display: inline-block;
+	width: 96%;
+	color: #FC0;
+	cursor: pointer;
+}
+#details, #book {
+	display: none;
+}
+.back {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1000;
+}
+em {
+	color: #F00;
+}
+::-webkit-input-placeholder {
+   color: #A6A6A6;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #A6A6A6;
+   opacity:  1;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #A6A6A6;
+   opacity:  1;
+}
+
+:-ms-input-placeholder {  
+   color: #A6A6A6;
+}
+input[type=text], input[type=tel], input[type=date], input[type=time] {
+	color: #FFF;
+}
+/* star rating ---------------------------- */
+.rating, .rating2, .rating3, .rating4 { float: right; }
+.rating > ul, .rating2 > ul, .rating3 > ul, .rating4 > ul { list-style: none; float: right; padding: 0; margin: 0;}
+.rating > ul > li, .rating2 > ul > li, .rating3 > ul > li, .rating4 > ul > li { float: left; margin-left: 2px; background: url(../visuels/star-rating.gif) no-repeat; width: 25px; height: 25px; cursor: pointer; }
+.rating > ul > li:first-child, .rating2 > ul > li:first-child, .rating3 > ul > li:first-child, .rating4 > ul > li:first-child { margin-right: 0; }
+.rating > ul > li.hover, .rating2 > ul > li.hover, .rating3 > ul > li.hover, .rating4 > ul > li.hover { background-position: -25px; }
+.rating > ul > li.active, .rating2 > ul > li.active, .rating3 > ul > li.active, .rating4 > ul > li.active { background-position: -50px; }
+.rating > span.less, .rating2 > span.less, .rating3 > span.less, .rating4 > span.less { cursor: pointer; background: url(../visuels/star-rating.gif) -75px no-repeat; display: block; float: right; height: 25px; width: 25px;}
