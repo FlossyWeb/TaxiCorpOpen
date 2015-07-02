@@ -162,6 +162,7 @@ if ( app ) {
 			$("body").empty().append('<img src="no_network.png" width="'+screen.width+'" height="'+screen.height+'" onClick="window.location.reload()" />');
 		}
 		StatusBar.overlaysWebView(false);
+		StatusBar.backgroundColorByHexString("#E7B242");
 	}
 }
 

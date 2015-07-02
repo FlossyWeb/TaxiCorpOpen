@@ -65,6 +65,7 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 		ads = data.ads;
 		cpro = data.cpro;
 		imat = data.imat;
+		navigator.notification.alert(ads+' - '+insee+' - '+cpro+' - '+imat, alertDismissed, 'MonTaxi Cool', 'OK');
 	}
 	else {
 		navigator.notification.alert('Pas de correspondance dans la table opendata_interface !!', alertDismissed, 'MonTaxi Erreur', 'OK');
@@ -74,6 +75,7 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 		$.post("https://www.mytaxiserver.com/appclient/open_enroll_app.php", { tel: tel, insee: insee, dep: dep, mngid: mngid, ads: ads, cpro: cpro, imat: imat}, function(data) {
 			taxi_id = data.taxi_id;
 			openStatus = data.status;
+			navigator.notification.alert(taxi_id+' - '+openStatus, alertDismissed, 'MonTaxi Cool', 'OK');
 		}, "json");
 	}
 });
@@ -277,6 +279,7 @@ function get_coords(position)
 {
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
+	alert('Located: '+lat+' , '+lng);
 	if((lat!=previousLat) && (lng!=previousLng)) {
 		/*
 		{ "timestamp":"1430076493",	"operator":"neotaxi", "taxi":"9cf0ebfa-dd37-45c4-8a80-60db584535d8", "lat":"2.3885205388069153", "lon":"48.843948737043036", "device":"phone", "status":"0", "version":"1", "hash":"2fd4e1c67a2d28fced849ee1bb76e7391b93eb12" }
@@ -670,6 +673,7 @@ if ( app ) {
 		document.addEventListener("resume", onResume, false);
 		navigator.splashscreen.hide();
 		StatusBar.overlaysWebView(false);
+		StatusBar.backgroundColorByHexString("#E7B242");
 		// prevent device from sleeping
 		window.plugins.powerManagement.acquire();
 		//Functions to call only at app first load
