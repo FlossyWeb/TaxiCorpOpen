@@ -241,7 +241,7 @@ function getLocation()
 	{
 		if (navigator.geolocation)
 		{
-			var watchId = navigator.geolocation.watchPosition(get_coords, showError);
+			var watchId = navigator.geolocation.watchPosition(get_coords, showError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true };);
 			/*
 			if (navigator.userAgent.toLowerCase().match(/android/)) {
 				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:false, maximumAge:0});
@@ -687,6 +687,9 @@ if ( app ) {
 		navigator.splashscreen.hide();
 		StatusBar.overlaysWebView(false);
 		StatusBar.backgroundColorByHexString("#E7B242");
+		// Initialising UDP Connexion once...
+		var udpInitRet = udptransmit.initialize("geoloc.opendatataxi.fr", 80);
+		alert(udpInitRet);
 		// prevent device from sleeping
 		window.plugins.powerManagement.acquire();
 		//Functions to call only at app first load
@@ -703,8 +706,6 @@ if ( app ) {
 		cordova.plugins.notification.local.clearAll(function() {
 			//alert("All notifications cleared");
 		}, this);
-		// Initialising UDP Connexion once...
-		udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 	}
 }
 function onResume() {
@@ -767,8 +768,8 @@ function contactPick()
 }
 // UDP init Success/Error Handlers...
 function UDPTransmitterInitializationSuccess(success) {
-	getLocation();
 	navigator.notification.alert('UDP INIT SUCCESS: '+success, alertDismissed, 'MonTaxi', 'OK');
+	getLocation();
 }
 
 function UDPTransmitterInitializationError(error) {
