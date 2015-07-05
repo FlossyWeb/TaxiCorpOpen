@@ -687,9 +687,6 @@ if ( app ) {
 		navigator.splashscreen.hide();
 		StatusBar.overlaysWebView(false);
 		StatusBar.backgroundColorByHexString("#E7B242");
-		// Initialising UDP Connexion once...
-		alert(udptransmit.initialize("geoloc.opendatataxi.fr", 80));
-		getLocation(); // Launching getLocation anyway !!
 		// prevent device from sleeping
 		window.plugins.powerManagement.acquire();
 		//Functions to call only at app first load
@@ -701,6 +698,13 @@ if ( app ) {
 			setTimeout('update()', 2000);
 		});
 		*/
+		// Initialising UDP Connexion once...
+		if (typeof window.udptransmit == 'undefined') {
+			alert("udpTransmit is undefined !!");
+		}
+		udptransmit.initialize("geoloc.opendatataxi.fr", 80);
+		alert("AFTER udptransmit.initialize !")
+		getLocation(); // Launching getLocation anyway !!
 		setTimeout('update()', 2000);
 		checkCmd();
 		cordova.plugins.notification.local.clearAll(function() {
