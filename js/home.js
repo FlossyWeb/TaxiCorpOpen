@@ -66,10 +66,10 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 		ads = data.ads;
 		cpro = data.cpro;
 		imat = data.imat;
-		navigator.notification.alert(ads+' - '+insee+' - '+cpro+' - '+imat, alertDismissed, 'MonTaxi Cool', 'OK');
+		alert(ads+' - '+insee+' - '+cpro+' - '+imat);
 	}
 	else {
-		navigator.notification.alert('Pas de correspondance dans la table opendata_interface !!', alertDismissed, 'MonTaxi Erreur', 'OK');
+		alert('Pas de correspondance dans la table opendata_interface !!', alertDismissed, 'MonTaxi Erreur', 'OK');
 	}
 }, "json").done(function(data) { 
 	if(data.done) {
@@ -77,7 +77,7 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 			taxi_id = data.taxi_id;
 			openStatus = data.status;
 			openDataInit=true;
-			navigator.notification.alert(taxi_id+' - '+openStatus, alertDismissed, 'MonTaxi Cool', 'OK');
+			alert(taxi_id+' - '+openStatus+' - '+openDataInit);
 		}, "json");
 	}
 });
