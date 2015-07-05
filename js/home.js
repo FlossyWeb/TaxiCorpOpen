@@ -241,7 +241,7 @@ function getLocation()
 	{
 		if (navigator.geolocation)
 		{
-			var watchId = navigator.geolocation.watchPosition(get_coords, showError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true };);
+			var watchId = navigator.geolocation.watchPosition(get_coords, showError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
 			/*
 			if (navigator.userAgent.toLowerCase().match(/android/)) {
 				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:false, maximumAge:0});
