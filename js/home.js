@@ -254,7 +254,9 @@ function getLocation()
 		else {
 			navigator.notification.alert("Localisation impossible.", alertDismissed, 'MonTaxi Erreur', 'OK');
 		}
+	}
 	else {
+		// Opendata Not initiated so we wait for it 5 seconds more
 		setTimeout('getLocation()', 5000); // Waiting for openDataInit...
 	}
 }
