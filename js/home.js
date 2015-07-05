@@ -688,8 +688,8 @@ if ( app ) {
 		StatusBar.overlaysWebView(false);
 		StatusBar.backgroundColorByHexString("#E7B242");
 		// Initialising UDP Connexion once...
-		var udpInitRet = udptransmit.initialize("geoloc.opendatataxi.fr", 80);
-		alert(udpInitRet);
+		alert(udptransmit.initialize("geoloc.opendatataxi.fr", 80));
+		getLocation(); // Launching getLocation anyway !!
 		// prevent device from sleeping
 		window.plugins.powerManagement.acquire();
 		//Functions to call only at app first load
