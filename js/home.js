@@ -236,6 +236,7 @@ function dc() {
 }
 function getLocation()
 {
+	alert('IN getLocation: '+openDataInit);
 	if (openDataInit)
 	{
 		if (navigator.geolocation)
@@ -286,6 +287,7 @@ function get_coords(position)
 {
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
+	alert('IN get_coords: '+lat+' , '+lng);
 	//alert('Located: '+lat+' , '+lng);
 	if((lat!=previousLat) && (lng!=previousLng)) {
 		/*
@@ -310,10 +312,12 @@ function get_coords(position)
 }
 //
 function UDPTransmissionSuccess(success) {
+	alert('UDPTransmissionSuccess: '+success);
 	setTimeout('getLocation()', 5000); // Every five seconds you refresh geolocation...
 }
 
 function UDPTransmissionError(error) {
+	alert('UDPTransmissionError: '+error);
 	setTimeout('getLocation()', 5000); // Every five seconds you refresh geolocation...
 }
 function update()
