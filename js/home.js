@@ -295,9 +295,10 @@ function get_coords(position)
 		{ "timestamp":"1430076493",	"operator":"neotaxi", "taxi":"9cf0ebfa-dd37-45c4-8a80-60db584535d8", "lat":"2.3885205388069153", "lon":"48.843948737043036", "device":"phone", "status":"0", "version":"1", "hash":"2fd4e1c67a2d28fced849ee1bb76e7391b93eb12" }
 		sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
 		*/
-		var stamp = new Date().getTime() / 1000; // timestamp in seconds
+		var stampDot = new Date().getTime() / 1000; // float timestamp in seconds
+		var stamp = parseInt(stampDot); // timestamp in seconds
 		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"1"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
-		var payload = '{ "timestamp":"'+stamp+'",	"operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"1", "hash":"'+geoHash+'" }';
+		var payload = '{ "timestamp":"'+stamp+'","operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"1", "hash":"'+geoHash+'" }';
 		alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
 	}
