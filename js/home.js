@@ -66,7 +66,7 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 		ads = data.ads;
 		cpro = data.cpro;
 		imat = data.imat;
-		alert(ads+' - '+insee+' - '+cpro+' - '+imat);
+		//alert(ads+' - '+insee+' - '+cpro+' - '+imat);
 	}
 	else {
 		alert('Pas de correspondance dans la table opendata_interface !!', alertDismissed, 'MonTaxi Erreur', 'OK');
@@ -77,7 +77,7 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 			taxi_id = data.taxi_id;
 			openStatus = data.status;
 			openDataInit=true;
-			alert(taxi_id+' - '+openStatus+' - '+openDataInit);
+			//alert(taxi_id+' - '+openStatus+' - '+openDataInit);
 		}, "json");
 	}
 });
@@ -289,15 +289,16 @@ function get_coords(position)
 {
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
-	alert('IN get_coords: '+lat+' , '+lng);
 	//alert('Located: '+lat+' , '+lng);
 	if((lat!=previousLat) && (lng!=previousLng)) {
 		/*
 		{ "timestamp":"1430076493",	"operator":"neotaxi", "taxi":"9cf0ebfa-dd37-45c4-8a80-60db584535d8", "lat":"2.3885205388069153", "lon":"48.843948737043036", "device":"phone", "status":"0", "version":"1", "hash":"2fd4e1c67a2d28fced849ee1bb76e7391b93eb12" }
+		sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
 		*/
 		var stamp = new Date().getTime() / 1000; // timestamp in seconds
-		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"1"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
+		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"2"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
 		var payload = '{ "timestamp":"'+stamp+'",	"operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"2", "hash":"'+geoHash+'" }';
+		//alert(payload);
 		udptransmit.sendMessage(payload);
 	}
 	previousLat = lat;
@@ -315,12 +316,12 @@ function get_coords(position)
 //
 function UDPTransmissionSuccess(success) {
 	alert('UDPTransmissionSuccess: '+success);
-	setTimeout('getLocation()', 5000); // Every five seconds you refresh geolocation...
+	//setTimeout('getLocation()', 5000); // Every five seconds you refresh geolocation...
 }
 
 function UDPTransmissionError(error) {
 	alert('UDPTransmissionError: '+error);
-	setTimeout('getLocation()', 5000); // Every five seconds you refresh geolocation...
+	//setTimeout('getLocation()', 5000); // Every five seconds you refresh geolocation...
 }
 function update()
 {
