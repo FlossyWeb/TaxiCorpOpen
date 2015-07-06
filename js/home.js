@@ -241,7 +241,7 @@ function getLocation()
 	{
 		if (navigator.geolocation)
 		{
-			var watchId = navigator.geolocation.watchPosition(get_coords, showError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
+			var watchId = navigator.geolocation.watchPosition(get_coords, showError, { maximumAge: 30000, timeout: 5000, enableHighAccuracy: true });
 			/*
 			if (navigator.userAgent.toLowerCase().match(/android/)) {
 				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:false, maximumAge:0});
@@ -299,7 +299,8 @@ function get_coords(position)
 		var stamp = parseInt(stampDot); // timestamp in seconds
 		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"1"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
 		var payload = '{ "timestamp":"'+stamp+'","operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"1", "hash":"'+geoHash+'" }';
-		alert(JSON.stringify(payload));
+		$('#smsReturn').empty().append(payload);
+		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 		udptransmit.sendMessage(payload);
 	}
 	previousLat = lat;

@@ -44,7 +44,7 @@
 	<gap:plugin name="tr.bel.mamak.sms_plagin" version="0.1.0" />
 	<gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />
 	<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" />
-	<gap:plugin name="edu.uic.travelmidwest.cordova.udptransmit" version="0.0.1" />
+	<gap:plugin name="edu.uic.travelmidwest.cordova.udptransmit" />
 
     <icon src="icon.png" />
 	<icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
