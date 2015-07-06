@@ -236,7 +236,7 @@ function dc() {
 }
 function getLocation()
 {
-	alert('IN getLocation: '+openDataInit);
+	//alert('IN getLocation: '+openDataInit);
 	if (openDataInit)
 	{
 		if (navigator.geolocation)
@@ -299,8 +299,7 @@ function get_coords(position)
 		var stamp = parseInt(stampDot); // timestamp in seconds
 		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"1"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
 		var payload = '{ "timestamp":"'+stamp+'","operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"1", "hash":"'+geoHash+'" }';
-		$('#smsReturn').empty().append(payload);
-		$( "#popSms" ).popup( "open", { positionTo: "window" } );
+		//alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
 	}
 	previousLat = lat;
@@ -705,8 +704,9 @@ if ( app ) {
 		if (typeof window.udptransmit == 'undefined') {
 			alert("udpTransmit is undefined !!");
 		}
-		udptransmit.initialize("geoloc.opendatataxi.fr", 80);
-		alert("AFTER udptransmit.initialize !")
+		// Initializing UDP connection...
+		udptransmit.initialize("46.105.34.86", 80);
+		//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 		getLocation(); // Launching getLocation anyway !!
 		setTimeout('update()', 2000);
 		checkCmd();
