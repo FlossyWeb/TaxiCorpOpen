@@ -296,9 +296,9 @@ function get_coords(position)
 		sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
 		*/
 		var stamp = new Date().getTime() / 1000; // timestamp in seconds
-		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"2"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
-		var payload = '{ "timestamp":"'+stamp+'",	"operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"2", "hash":"'+geoHash+'" }';
-		//alert(payload);
+		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"1"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
+		var payload = '{ "timestamp":"'+stamp+'",	"operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"1", "hash":"'+geoHash+'" }';
+		alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
 	}
 	previousLat = lat;
