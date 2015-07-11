@@ -301,6 +301,10 @@ function get_coords(position)
 		var payload = '{ "timestamp":"'+stamp+'","operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"1", "hash":"'+geoHash+'" }';
 		//alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
+		$.post("https://www.mytaxiserver.com/appclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }).always(function(data) {
+			//setTimeout('getLocation()', 30000); // Every thirty seconds you check geolocation...
+			alert('Sent:'+lat+' , '+lng);
+		});
 	}
 	previousLat = lat;
 	previousLng = lng;
@@ -310,7 +314,6 @@ function get_coords(position)
 	//navigator.notification.alert('taxi: ' + taxi + ' tel: ' + tel + ' pass=' + pass);
 	$.post("https://www.mytaxiserver.com/appclient/open_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }).always(function(data) {
 		//setTimeout('getLocation()', 30000); // Every thirty seconds you check geolocation...
-		updateLocation();
 	});
 	*/	
 }
@@ -700,12 +703,12 @@ if ( app ) {
 			setTimeout('update()', 2000);
 		});
 		*/
-		// Initialising UDP Connexion once...
 		if (typeof window.udptransmit == 'undefined') {
 			alert("udpTransmit is undefined !!");
 		}
-		// Initializing UDP connection...
-		udptransmit.initialize("46.105.34.86", 80);
+		// Initialising UDP Connexion once...
+		udptransmit.initialize("192.168.1.48", 80);
+		//udptransmit.initialize("46.105.34.86", 80);
 		//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 		getLocation(); // Launching getLocation anyway !!
 		setTimeout('update()', 2000);
