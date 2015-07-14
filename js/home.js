@@ -243,10 +243,10 @@ function getLocation()
 		{
 			//var watchId = navigator.geolocation.watchPosition(get_coords, showError, { maximumAge: 30000, timeout: 5000, enableHighAccuracy: true });
 			if (navigator.userAgent.toLowerCase().match(/android/)) {
-				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:false, maximumAge:0});
+				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:false, maximumAge:5000, timeout: 5000});
 			}
 			else {
-				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:true, maximumAge:0});
+				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:true, maximumAge:0, maximumAge:5000, timeout: 5000});
 			}
 		}
 		else {
@@ -309,7 +309,7 @@ function get_coords(position)
 		udptransmit.sendMessage(payload);
 		$.post("https://www.mytaxiserver.com/appclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }).always(function(data) {
 			setTimeout('getLocation()', 5000); // Every thirty seconds you check geolocation...
-			alert('Sent:'+lat+' , '+lng);
+			//alert('Sent:'+lat+' , '+lng);
 		});
 	}
 	previousLat = lat;
