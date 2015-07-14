@@ -708,7 +708,7 @@ if ( app ) {
 		}
 		// Initialising UDP Connexion once...
 		udptransmit.initialize("192.168.1.42", 10000);
-		udptransmit.sendMessage("Hi There !");
+		//udptransmit.sendMessage("Hi There !");
 		//udptransmit.initialize("46.105.34.86", 80);
 		//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 		getLocation(); // Launching getLocation anyway !!
@@ -780,7 +780,7 @@ function contactPick()
 // UDP init Success/Error Handlers...
 function UDPTransmitterInitializationSuccess(success) {
 	navigator.notification.alert('UDP INIT SUCCESS: '+success, alertDismissed, 'MonTaxi', 'OK');
-	getLocation();
+	//getLocation();
 }
 
 function UDPTransmitterInitializationError(error) {
