@@ -289,7 +289,7 @@ function get_coords(position)
 {
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
-	//alert('Located: '+lat+' , '+lng);
+	alert('Located: '+lat+' , '+lng);
 	if((lat!=previousLat) && (lng!=previousLng)) {
 		/*
 		{ "timestamp":"1430076493",	"operator":"neotaxi", "taxi":"9cf0ebfa-dd37-45c4-8a80-60db584535d8", "lat":"2.3885205388069153", "lon":"48.843948737043036", "device":"phone", "status":"0", "version":"1", "hash":"2fd4e1c67a2d28fced849ee1bb76e7391b93eb12" }
