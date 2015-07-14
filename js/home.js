@@ -308,12 +308,12 @@ function get_coords(position)
 		//alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
 		$.post("https://www.mytaxiserver.com/appclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }).always(function(data) {
-			setTimeout('getLocation()', 5000); // Every thirty seconds you check geolocation...
 			//alert('Sent:'+lat+' , '+lng);
 		});
 	}
 	previousLat = lat;
 	previousLng = lng;
+	setTimeout('getLocation()', 5000); // Every thirty seconds you check geolocation...
 	/*
 	//var x=document.getElementById("results");
 	//x.innerHTML="lat = " + lat + " - lng = " +lng;
