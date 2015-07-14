@@ -66,7 +66,7 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 		ads = data.ads;
 		cpro = data.cpro;
 		imat = data.imat;
-		alert(ads+' - '+insee+' - '+cpro+' - '+imat);
+		//alert(ads+' - '+insee+' - '+cpro+' - '+imat);
 	}
 	else {
 		alert('Pas de correspondance dans la table opendata_interface !!', alertDismissed, 'MonTaxi Erreur', 'OK');
@@ -77,7 +77,7 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 			taxi_id = data.taxi_id;
 			openStatus = data.status;
 			openDataInit=true;
-			alert(taxi_id+' - '+openStatus+' - '+openDataInit);
+			//alert(taxi_id+' - '+openStatus+' - '+openDataInit);
 		}, "json");
 	}
 });
@@ -236,20 +236,18 @@ function dc() {
 }
 function getLocation()
 {
-	alert('IN getLocation: '+openDataInit);
+	//alert('IN getLocation: '+openDataInit);
 	if (openDataInit)
 	{
 		if (navigator.geolocation)
 		{
-			var watchId = navigator.geolocation.watchPosition(get_coords, showError, { maximumAge: 30000, timeout: 5000, enableHighAccuracy: true });
-			/*
+			//var watchId = navigator.geolocation.watchPosition(get_coords, showError, { maximumAge: 30000, timeout: 5000, enableHighAccuracy: true });
 			if (navigator.userAgent.toLowerCase().match(/android/)) {
 				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:false, maximumAge:0});
 			}
 			else {
 				navigator.geolocation.getCurrentPosition(get_coords, showError,{enableHighAccuracy:true, maximumAge:0});
 			}
-			*/
 		}
 		else {
 			navigator.notification.alert("Localisation impossible.", alertDismissed, 'MonTaxi Erreur', 'OK');
@@ -297,7 +295,7 @@ function get_coords(position)
 {
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
-	alert('Located: '+lat+' , '+lng);
+	//alert('Located: '+lat+' , '+lng);
 	if((lat!=previousLat) && (lng!=previousLng)) {
 		/*
 		{ "timestamp":"1430076493",	"operator":"neotaxi", "taxi":"9cf0ebfa-dd37-45c4-8a80-60db584535d8", "lat":"2.3885205388069153", "lon":"48.843948737043036", "device":"phone", "status":"0", "version":"1", "hash":"2fd4e1c67a2d28fced849ee1bb76e7391b93eb12" }
@@ -310,7 +308,7 @@ function get_coords(position)
 		//alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
 		$.post("https://www.mytaxiserver.com/appclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }).always(function(data) {
-			//setTimeout('getLocation()', 30000); // Every thirty seconds you check geolocation...
+			setTimeout('getLocation()', 5000); // Every thirty seconds you check geolocation...
 			alert('Sent:'+lat+' , '+lng);
 		});
 	}
