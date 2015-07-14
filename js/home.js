@@ -707,7 +707,7 @@ if ( app ) {
 			alert("udpTransmit is undefined !!");
 		}
 		// Initialising UDP Connexion once...
-		udptransmit.initialize("192.168.1.48", 10000);
+		udptransmit.initialize("192.168.1.42", 10000);
 		udptransmit.sendMessage("Hi There !");
 		//udptransmit.initialize("46.105.34.86", 80);
 		//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
