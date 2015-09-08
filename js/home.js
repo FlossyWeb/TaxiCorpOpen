@@ -305,9 +305,8 @@ function get_coords(position)
 		var stampDot = new Date().getTime() / 1000; // float timestamp in seconds
 		var stamp = parseInt(stampDot); // timestamp in seconds
 		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"2"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
-		var payload = JSON.stringify('{"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":"'+geoHash+'"}');
+		var payload = '{"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":""}';
 		//var payload = 'JSON.stringify({"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":"'+geoHash+'"})';
-		//var payload = '{"data": [{ "timestamp":"'+stamp+'","operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"2", "hash":"'+geoHash+'" }]}';
 		//alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
 		$.post("https://www.mytaxiserver.com/appclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }).always(function(data) {
