@@ -304,7 +304,7 @@ function get_coords(position)
 		var stampDot = new Date().getTime() / 1000; // float timestamp in seconds
 		var stamp = parseInt(stampDot); // timestamp in seconds
 		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"2"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
-		var payload = '{ "timestamp":"'+stamp+'","operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"2", "hash":"'+geoHash+'" }';
+		var payload = '{"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":"'+geoHash+'"}';
 		//var payload = '{"data": [{ "timestamp":"'+stamp+'","operator":"montaxi", "taxi":"'+taxi_id+'", "lat":"'+lat+'", "lon":"'+lng+'", "device":"phone", "status":"0", "version":"2", "hash":"'+geoHash+'" }]}';
 		//alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
@@ -714,9 +714,9 @@ if ( app ) {
 			alert("udpTransmit is undefined !!");
 		}
 		// Initialising UDP Connexion once...
-		udptransmit.initialize("192.168.1.42", 10000);
+		//udptransmit.initialize("192.168.1.42", 10000);
 		//udptransmit.initialize("46.105.34.86", 80);
-		//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
+		udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 		getLocation(); // Launching getLocation anyway !!
 		setTimeout('update()', 2000);
 		checkCmd();
