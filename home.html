@@ -23,7 +23,9 @@
             media="(device-width: 320px) and (device-height: 568px)
             and (-webkit-device-pixel-ratio: 2)"
             href="visuels/startup_image_i5.png">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<link rel="stylesheet" href="css/themes/monTaxiPart.min.css" />
+	<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <link type="text/css" rel="stylesheet" href="css/mobile.css" />
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -60,9 +62,9 @@
     <script type="text/javascript" src="js/home.js"></script>
     </head>
     <body>
-        <div data-role="panel" id="homepanel" data-position="left" data-display="reveal" data-theme="e">
+        <div data-role="panel" id="homepanel" data-position="right" data-display="reveal" data-theme="c">
             <!-- panel content goes here -->
-            <ul data-role="listview" data-inset="true" data-theme="b">
+            <ul data-role="listview" data-inset="true" data-theme="c">
               <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
               <li><a href="#jobs_taker" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>Courses directes</b></a></li>
               <li><a href="#cmd" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-clock"><b>Courses command&eacute;es</b></a></li>
@@ -78,85 +80,97 @@
               <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
             </ul>
 			<button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power" onClick="dc()">D&eacute;connexion</button>
-       </div><!-- /panel -->
+		</div><!-- /panel -->
         <center>
-        <div data-role="page" data-theme="a" id="home">
-
-            <div class="ui-content" role="main" id="home_cont">
-                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em; text-align: left;">
-                <div style="text-align: left;">
-                    <div id="dispo">
-						<a href="#home" onClick="Dispo_Off()"><img src="visuels/DispoOn_flat.png" width="100%"/></a>
-                	</div>
-                    <div id="warn_home">
-                    	<a href="#jobs_taker" data-transition="slide" id="go2jobs">
-                            <img src="visuels/Aucune_course_flat.png" width="100%"/>
-                        </a>
-                    </div>
-                </div>
-                </div>
+        <div data-role="page" data-theme="c" id="home">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+				<div id="dispo">
+					<a href="#home" onClick="Dispo_Off()" style=""><img src="visuels/DispoOn_flat.png" width="100%"/></a>
+				</div>
+				<div id="warn_home">
+					<a href="#jobs_taker" data-transition="slide">
+						<img src="visuels/Aucune_course_flat.png" width="100%"/>
+					</a>
+				</div>
                 <img src="visuels/p1.png" width="128"/>
-                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
-					<a href="#history" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                        	<img src="visuels/Historique_flat.png" width="90%"/><br>
-                    		Historique
-                        </p>
-                    </a>
-					<a href="#cmd" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<span class="orders"></span>
-                    	<p style="font-size: x-small;color:#FFF;">
-                            <img src="visuels/Ordered_flat.png" width="90%"/><br>
-                            Commandes
-                        </p>
-                    </a>
-					<a href="#planning" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                        	<img src="visuels/Planning_flat.png" width="90%"/><br>
-                    		Planning
-                        </p>
-                    </a>
-					<a href="#" onClick="help()" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                            <img src="visuels/Help_flat.png" width="90%"/><br>
-                            Aide utilisateur
-                        </p>
-                    </a>
-					<a href="#manage" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                            <img src="visuels/Facture_flat.png" width="90%"/><br>
-                            Mon compte
-                        </p>
-                    </a>
-					<a href="#directions_map" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                        	<img src="visuels/Maps_flat.png" width="90%"/><br>
-                    		GPS
-                        </p>
-                    </a>
-					<a href="#infos" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                            <img src="visuels/infos.png" width="90%"/><br>
-                            Infos monTaxi
-                        </p>
-                    </a>
-					<a href="#" onClick="taximedia()" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                            <img src="visuels/TaxiMedia_flat.png" width="90%"/><br>
-                            TaxiMedia.fr
-                        </p>
-                    </a>
-					<a href="#" onClick="myTaxiDown()" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                            <img src="visuels/Taxi.png" width="90%"/><br>
-                            Partager
-                        </p>
-                    </a>
-                    <!-- N&rsquo;oubliez pas de vous rendre indisponible quand vous ne d&eacute;sirez plus prendre de courses, cela vous &eacute;vitera d&rsquo;&ecirc;tre importun&eacute; durant votre repos.<br> -->
-                </div>
-                <a href="#secureDialog" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-alert" class="secure-bt">Bouton d&rsquo;urgence</a>
-                <div data-role="popup" data-theme="a" id="secureDialog" data-dismissible="false" data-overlay-theme="b">
-                    <div data-theme="a" data-role="header">
+				<div class="spacer"></div>
+				<a href="#history" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/historic_icon.png" width="90%"/><br>
+						Historique
+					</p>
+				</a>
+				<a href="#cmd" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<span class="orders"></span>
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/ring_icon.png" width="90%"/><br>
+						Commandes
+					</p>
+				</a>
+				<a href="#planning" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/planning_icon.png" width="90%"/><br>
+						Planning
+					</p>
+				</a>
+				<div class="spacer"></div>
+				<a href="#" onClick="help()" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/help_icon.png" width="90%"/><br>
+						Aide utilisateur
+					</p>
+				</a>
+				<a href="#manage" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/account_icon.png" width="90%"/><br>
+						Mon compte
+					</p>
+				</a>
+				<a href="#directions_map" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/gps_icon.png" width="90%"/><br>
+						GPS
+					</p>
+				</a>
+				<div class="spacer"></div>
+				<a href="#infos" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/info_icon.png" width="90%"/><br>
+						Infos monTaxi
+					</p>
+				</a>
+				<a href="#" onClick="taximedia()" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/taximedia_icon.png" width="90%"/><br>
+						TaxiMedia.fr
+					</p>
+				</a>
+				<a href="#" onClick="myTaxiDown()" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/share_icon.png" width="90%"/><br>
+						Partager
+					</p>
+				</a>
+				<!-- N&rsquo;oubliez pas de vous rendre indisponible quand vous ne d&eacute;sirez plus prendre de courses, cela vous &eacute;vitera d&rsquo;&ecirc;tre importun&eacute; durant votre repos.<br> -->
+                <a href="#secureDialog" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-c ui-btn-icon-left ui-icon-alert secure-bt">Bouton d&rsquo;urgence</a>
+                <div data-role="popup" data-theme="c" id="secureDialog" data-dismissible="false" data-overlay-theme="b">
+                    <div data-theme="c" data-role="header">
                         <h1>
                             Confirmation
                         </h1>
@@ -168,9 +182,9 @@
                         <div id="secureResults"></div>
                     </div>
                 </div>        
-                <div data-role="popup" data-theme="a" id="errorPop" data-dismissible="true" data-overlay-theme="b">
+                <div data-role="popup" data-theme="c" id="errorPop" data-dismissible="true" data-overlay-theme="b">
 					<a href="#home" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
-                    <div data-theme="a" data-role="header">
+                    <div data-theme="c" data-role="header">
                         <h1>
                             G&eacute;olocalisation
                         </h1>
@@ -181,59 +195,67 @@
                 </div>
                 <a href="#homepanel" id="homepanel_poper"></a>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont0" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont0" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
         
-        <div data-role="page" data-theme="a" id="jobs_taker">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1 style="padding: 0; margin: 0;">
-                    <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
-                    <div id="sound" style="display:inline-block;"><button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="24px"></button></div>
-                </h1>
-            </div>
+        <div data-role="page" data-theme="c" id="jobs_taker">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<div id="sound" style="display:inline-block;"><button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="24px"></button></div>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
-                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
-                    <div id="dispo_jobs">                                            
-                    </div>
-                    <div id="warn">
-                    	<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>
-                    </div>
-                </div>
+				<div id="dispo_jobs">                                            
+				</div>
+				<div id="warn">
+					<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>
+				</div>
                 <img src="visuels/p2.png" width="128"/>
                 <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
-                    <h2 style="color:#0F0; font-size:large;">En attente de courses</h2><hr>
+                    <h2 style="color:#f7b134; font-size:x-large;">Courses directes</h2><hr>
                     <div id="screen_job" style="text-align:left;">
+						<br><p><b>En attente de courses...</b></p><br>
                     </div>
-                    
                     <hr>
-					<a href="#history" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                        	<img src="visuels/Historique_flat.png" width="90%"/><br>
-                    		Historique
-                        </p>
-                    </a>
-					<a href="#planning" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                        	<img src="visuels/Planning_flat.png" width="90%"/><br>
-                    		Planning
-                        </p>
-                    </a>
-					<a href="#cmd" data-transition="slide" style="width:32%;display:inline-block;">
-                        <span class="ordersjob"></span>
-                    	<p style="font-size: x-small;color:#FFF;">
-                            <img src="visuels/Ordered_flat.png" width="90%"/><br>
-                            Commandes
-                        </p>
-                    </a>
                 </div>
                 <div class="cleaner"></div>
-                <a href="#secureDialogJobs" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-alert">Bouton d&rsquo;urgence</a>
-                <div data-role="popup" data-theme="a" id="secureDialogJobs" data-dismissible="false" data-overlay-theme="b">
-                    <div data-theme="a" data-role="header">
+				<a href="#history" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/historic_icon.png" width="90%"/><br>
+						Historique
+					</p>
+				</a>
+				<a href="#planning" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/planning_icon.png" width="90%"/><br>
+						Planning
+					</p>
+				</a>
+				<a href="#cmd" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<span class="ordersjob"></span>
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/ring_icon.png" width="90%"/><br>
+						Commandes
+					</p>
+				</a>
+                <div class="cleaner"></div>
+                <a href="#secureDialogJobs" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-c ui-btn-icon-left ui-icon-alert secure-bt">Bouton d&rsquo;urgence</a>
+                <div data-role="popup" data-theme="c" id="secureDialogJobs" data-dismissible="false" data-overlay-theme="b">
+                    <div data-theme="c" data-role="header">
                         <h1>
                             Confirmation
                         </h1>
@@ -254,23 +276,33 @@
                 </div>
                 -->
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont1" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont1" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
-        <div data-role="page" id="delayPop" data-transition="pop" data-theme="a">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1 style="width:100%; padding: 0; margin: 0;">
-                    <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
-                </h1>
-            </div>
+        <div data-role="page" id="delayPop" data-transition="pop" data-theme="c">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
             	<p>&nbsp;</p>
                 <div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em;">
                     <label for="delay">Temps d&rsquo;approche : </label>
-                    <select name="delay" id="delay" data-theme="b">
+                    <select name="delay" id="delay" data-theme="c">
                         <option selected value="7">d&eacute;lai</option>
                         <option value="5">5 minutes</option>
                         <option value="10">10 minutes</option>
@@ -278,7 +310,7 @@
                         <option value="30">30 minutes</option>
                     </select>
                     <!-- 
-                    <a href="#" id="link2diary" data-role="button" data-iconpos="left" data-icon="check" data-theme="b" style="display:none;">Envoyer</a>
+                    <a href="#" id="link2diary" data-role="button" data-iconpos="left" data-icon="check" data-theme="c" style="display:none;">Envoyer</a>
                     -->
                     <div id="hideCall">
                         <button id="directCall" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onClick="directCall()">Envoyer</button>
@@ -286,66 +318,85 @@
                     <div id="delayConf"></div>
                 </div>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont2" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont2" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
-        <div data-role="page" data-theme="a" id="cmd">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1 style="width:100%; padding: 0; margin: 0;">
-                    <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
-                    <button onClick="refreshCmd()" class="ui-btn ui-btn-b ui-icon-refresh ui-shadow-icon ui-btn-icon-notext ui-corner-all"></button>
-                </h1>
-            </div>
+        <div data-role="page" data-theme="c" id="cmd">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<button onClick="refreshCmd()" class="ui-btn ui-btn-b ui-icon-refresh ui-shadow-icon ui-btn-icon-notext ui-corner-all"></button>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
-                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
-                    <div id="dispo_cmd">                                            
-                    </div>
-                    <div id="warn_cmd">
-                    	<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>
-                    </div>
-                </div>
+				<div id="dispo_cmd">                                            
+				</div>
+				<div id="warn_cmd">
+					<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>
+				</div>
                 <img src="visuels/p2.png" width="128"/>
                 <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
-                    <h2 style="color:#0CF; font-size:large;">Courses command&eacute;es</h2><hr>
+                    <h2 style="color:#f7b134; font-size:x-large;">Courses command&eacute;es</h2><hr>
                     <div id="screen_bookings" style="text-align:left;">
+						<br><p><b>Pas de r&eacute;servation pour l&rsquo;instant. En attente...</b></p><br>
                     </div>
                     <hr>
-					<a href="#history" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                        	<img src="visuels/Historique_flat.png" width="90%"/><br>
-                    		Historique
-                        </p>
-                    </a>
-					<a href="#planning" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                        	<img src="visuels/Planning_flat.png" width="90%"/><br>
-                    		Planning
-                        </p>
-                    </a>
-					<a href="#infos" data-transition="slide" style="width:32%;display:inline-block;">
-                    	<p style="font-size: x-small;color:#FFF;">
-                            <img src="visuels/infos.png" width="90%"/><br>
-                            Infos monTaxi
-                        </p>
-                    </a>
                 </div>
                 <div class="cleaner"></div>
+				<a href="#history" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/historic_icon.png" width="90%"/><br>
+						Historique
+					</p>
+				</a>
+				<a href="#planning" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/planning_icon.png" width="90%"/><br>
+						Planning
+					</p>
+				</a>
+				<a href="#infos" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/info_icon.png" width="90%"/><br>
+						Infos monTaxi
+					</p>
+				</a>
+                <div class="cleaner"></div>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont3" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont3" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
-        <div data-role="page" data-theme="a" id="planning">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1 style="width:100%; padding: 0; margin: 0;">
-                    <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>        
-                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
-                </h1>
-            </div>
+        <div data-role="page" data-theme="c" id="planning">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
                 <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
                 	<p class="auction"><b>Courses command&eacute;es</b></p>
@@ -356,18 +407,28 @@
                     </div>
                </div>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont4" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont4" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
-        <div data-role="page" data-theme="a" id="history">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1 style="width:100%; padding: 0; margin: 0;">
-                    <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
-                </h1>
-            </div>
+        <div data-role="page" data-theme="c" id="history">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
                 <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
                 	<p class="auction"><b>Historique des courses</b></p>
@@ -378,37 +439,57 @@
                     </div>
                </div>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont5" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont5" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
-        <div data-role="page" data-theme="a" id="infos">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1 style="width:100%; padding: 0; margin: 0;">
-                    <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
-                </h1>
-            </div>
+        <div data-role="page" data-theme="c" id="infos">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
                 <img src="visuels/Infos_header.png" width="96%"/>
                 <div id="infos_cont"></div>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont6" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont6" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
-        <div data-role="page" data-theme="a" id="manage">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1 style="width:100%; padding: 0; margin: 0;">
-                    <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline"  data-transition="slide"><b>Menu</b></a>
-                </h1>
-            </div>
+        <div data-role="page" data-theme="c" id="manage">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
                <div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em; text-align: left;">
-                    <div data-role="collapsible-set" data-theme="b" data-content-theme="a">
+                    <div data-role="collapsible-set" data-theme="c" data-content-theme="a">
                         <div data-role="collapsible" data-collapsed="true" id="mod_collaps">
                             <h1>
                                  Modifier mon compte
@@ -492,7 +573,7 @@
                                 <label for="cb">
                                     Paiement CB : 
                                 </label>
-                                <select name="cb" id="cb" data-theme="a" data-role="flipswitch">
+                                <select name="cb" id="cb" data-theme="c" data-role="flipswitch">
                                     <option value="0">
                                         Non
                                     </option>
@@ -503,7 +584,7 @@
                                 <label for="medic">
                                     Vehicule conventionn&eacute; : 
                                 </label>
-                                <select name="medic" id="medic" data-theme="a" data-role="flipswitch">
+                                <select name="medic" id="medic" data-theme="c" data-role="flipswitch">
                                     <option value="0">
                                         Non
                                     </option>
@@ -514,7 +595,7 @@
                                 <label for="animal">
                                     Acceptez-vous les animaux : 
                                 </label>
-                                <select name="animal" id="animal" data-theme="a" data-role="flipswitch">
+                                <select name="animal" id="animal" data-theme="c" data-role="flipswitch">
                                     <option value="0">
                                         Non
                                     </option>
@@ -605,6 +686,13 @@
                         </div>
                         <div data-role="collapsible" data-collapsed="true">
                             <h1>
+                                 Voir mes notes moyennes
+                            </h1>
+                            <div id="myRates">
+                            </div>
+                        </div>
+                        <div data-role="collapsible" data-collapsed="true">
+                            <h1>
                                 CGV 
                             </h1>
                             <a href="#" onClick="cgv()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-info" data-transition="slide"><b>Consulter les CGV</b></a>
@@ -633,9 +721,9 @@
 
                 </div>
                 <div id="returns"></div>
-                <div data-role="popup" data-theme="b" id="popSms" data-dismissible="true">
+                <div data-role="popup" data-theme="c" id="popSms" data-dismissible="true">
  					<a href="#manage" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
-                   <div data-theme="a" data-role="header">
+                   <div data-theme="c" data-role="header">
                         <p style="font-size:21px;text-align:center;"><b>
                             Partage SMS
                         </b></p>
@@ -644,9 +732,9 @@
                         <div id="smsReturn"></div>
                     </div>
                 </div>
-                <div data-role="popup" data-theme="b" id="returnsBox" data-dismissible="true">
+                <div data-role="popup" data-theme="c" id="returnsBox" data-dismissible="true">
  					<a href="#manage" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
-                   <div data-theme="a" data-role="header">
+                   <div data-theme="c" data-role="header">
                         <p style="font-size:21px;text-align:center;"><b>
                             Modification CB
                         </b></p>
@@ -656,18 +744,36 @@
                     </div>
                 </div>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont7" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont7" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
         
-		<div id="directions_map" data-role="page" data-theme="e">
+		<div id="directions_map" data-role="page" data-theme="c">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<!--
 			<div data-role="header">
             	<a href="#home" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-back ui-btn-inline"><h1><b>Accueil</b></h1></a>
                 <a href="#homepanel" id="mapPanel_poper" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><h1><b>Menu</b></h1></a>
 			</div>
             <div class="spacer"></div><div class="spacer"></div><div class="spacer"></div>
+			-->
 			<div class="ui-content" role="main">	
 				<div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1.5em;">
 					<p>
@@ -690,25 +796,35 @@
 			</div>
 		</div>
 
-        <div data-role="page" data-theme="a" id="toolate">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1 style="width:100%; padding: 0; margin: 0;">
-                    <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Accueil</b></a>
-                </h1>
-            </div>
+        <div data-role="page" data-theme="c" id="toolate">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
                 <div id="late_cont" class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
                </div>                    
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont8" data-position="fixed">
+            <div data-theme="c" data-role="footer" id="footer_cont8" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
         
-        <div data-role="page" data-theme="a" id="urgency">
-            <div data-theme="a" data-role="header" data-position="fixed">
+        <div data-role="page" data-theme="c" id="urgency">
+            <div data-theme="c" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0; color: #F00;">
                 	URGENCE
                 </h1>
@@ -720,7 +836,7 @@
                </div>                    
                 <div id="urgencyResults"></div>
             </div>
-            <div data-theme="a" data-role="footer" data-position="fixed">
+            <div data-theme="c" data-role="footer" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Proc&eacute;dure d&rsquo;appel d&rsquo;urgence activ&eacute;e.</b></marquee></div>
             </div>
         </div>

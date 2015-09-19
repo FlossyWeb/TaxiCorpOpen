@@ -24,8 +24,10 @@
                 media="(device-width: 320px) and (device-height: 568px)
                 and (-webkit-device-pixel-ratio: 2)"
                 href="visuels/startup_image_i5.png">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-        <link type="text/css" rel="stylesheet" href="css/mobile.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+		<link rel="stylesheet" href="css/themes/monTaxiPart.min.css" />
+		<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/index.css" />
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script type="text/javascript">
@@ -78,40 +80,456 @@
         
     </head>
     <body>
-    <center>
-        <div data-role="page" data-theme="a" id="portal">
-            <div data-theme="a" data-role="header" data-position="fixed">
-				<h1><a href="#" style="color:#09F; font-size:18px;">Bienvenue</a></h1>            
-            </div>
+        <div data-role="panel" id="homepanel" data-position="right" data-display="reveal" data-theme="c">
+            <!-- panel content goes here -->
+            <ul data-role="listview" data-inset="true" data-theme="c">
+              <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
+              <li><a href="#jobs_taker" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>Courses directes</b></a></li>
+              <li><a href="#cmd" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-clock"><b>Courses command&eacute;es</b></a></li>
+              <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
+              <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
+              <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
+              <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
+              <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
+              <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
+              <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos monTaxi</b></a></li>
+              <li><a href="#" onClick="myTaxiDown()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
+              <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+              <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
+            </ul>
+			<button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power" onClick="dc()">D&eacute;connexion</button>
+		</div><!-- /panel -->
+        <center>
+        <div data-role="page" data-theme="c" id="home">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
             <div class="ui-content" role="main">
-                <div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em;display:block;">
-                    <div data-role="collapsible-set" data-theme="b" data-content-theme="a">
-                        <div data-role="collapsible" data-collapsed="true" id="reg_collaps">
+				<div id="dispo">
+					<a href="#home" onClick="Dispo_Off()" style=""><img src="visuels/DispoOn_flat.png" width="100%"/></a>
+				</div>
+				<div id="warn_home">
+					<a href="#jobs_taker" data-transition="slide">
+						<img src="visuels/Aucune_course_flat.png" width="100%"/>
+					</a>
+				</div>
+                <img src="visuels/p1.png" width="128"/>
+				<div class="spacer"></div>
+				<a href="#history" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/historic_icon.png" width="90%"/><br>
+						Historique
+					</p>
+				</a>
+				<a href="#cmd" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<span class="orders"></span>
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/ring_icon.png" width="90%"/><br>
+						Commandes
+					</p>
+				</a>
+				<a href="#planning" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/planning_icon.png" width="90%"/><br>
+						Planning
+					</p>
+				</a>
+				<div class="spacer"></div>
+				<a href="#" onClick="help()" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/help_icon.png" width="90%"/><br>
+						Aide utilisateur
+					</p>
+				</a>
+				<a href="#manage" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/account_icon.png" width="90%"/><br>
+						Mon compte
+					</p>
+				</a>
+				<a href="#directions_map" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/gps_icon.png" width="90%"/><br>
+						GPS
+					</p>
+				</a>
+				<div class="spacer"></div>
+				<a href="#infos" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/info_icon.png" width="90%"/><br>
+						Infos monTaxi
+					</p>
+				</a>
+				<a href="#" onClick="taximedia()" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/taximedia_icon.png" width="90%"/><br>
+						TaxiMedia.fr
+					</p>
+				</a>
+				<a href="#" onClick="myTaxiDown()" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/share_icon.png" width="90%"/><br>
+						Partager
+					</p>
+				</a>
+				<!-- N&rsquo;oubliez pas de vous rendre indisponible quand vous ne d&eacute;sirez plus prendre de courses, cela vous &eacute;vitera d&rsquo;&ecirc;tre importun&eacute; durant votre repos.<br> -->
+                <a href="#secureDialog" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-c ui-btn-icon-left ui-icon-alert secure-bt">Bouton d&rsquo;urgence</a>
+                <div data-role="popup" data-theme="c" id="secureDialog" data-dismissible="false" data-overlay-theme="b">
+                    <div data-theme="c" data-role="header">
+                        <h1>
+                            Confirmation
+                        </h1>
+                    </div>
+                    <div class="ui-content" role="main">
+                        <h1>Lancer l&rsquo;appel d&rsquo;urgence ?</h1>
+                        <button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onClick="getLocationOnce()">CONFIRMER</button>
+                        <a href="#home" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-back ui-btn-icon-left" data-transition="slideUp">ANNULER</a>            
+                        <div id="secureResults"></div>
+                    </div>
+                </div>        
+                <div data-role="popup" data-theme="c" id="errorPop" data-dismissible="true" data-overlay-theme="b">
+					<a href="#home" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
+                    <div data-theme="c" data-role="header">
+                        <h1>
+                            G&eacute;olocalisation
+                        </h1>
+                    </div>
+                    <div class="ui-content" role="main">
+                        <div id="ePopResults"></div>
+                    </div>
+                </div>
+                <a href="#homepanel" id="homepanel_poper"></a>
+            </div>
+            <div data-theme="c" data-role="footer" id="footer_cont0" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
+                <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="c" id="jobs_taker">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<div id="sound" style="display:inline-block;"><button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="24px"></button></div>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+				<div id="dispo_jobs">                                            
+				</div>
+				<div id="warn">
+					<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>
+				</div>
+                <img src="visuels/p2.png" width="128"/>
+                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
+                    <h2 style="color:#f7b134; font-size:x-large;">Courses directes</h2><hr>
+                    <div id="screen_job" style="text-align:left;">
+						<br><p><b>En attente de courses...</b></p><br>
+                    </div>
+                    <hr>
+                </div>
+                <div class="cleaner"></div>
+				<a href="#history" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/historic_icon.png" width="90%"/><br>
+						Historique
+					</p>
+				</a>
+				<a href="#planning" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/planning_icon.png" width="90%"/><br>
+						Planning
+					</p>
+				</a>
+				<a href="#cmd" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<span class="ordersjob"></span>
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/ring_icon.png" width="90%"/><br>
+						Commandes
+					</p>
+				</a>
+                <div class="cleaner"></div>
+                <a href="#secureDialogJobs" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-c ui-btn-icon-left ui-icon-alert secure-bt">Bouton d&rsquo;urgence</a>
+                <div data-role="popup" data-theme="c" id="secureDialogJobs" data-dismissible="false" data-overlay-theme="b">
+                    <div data-theme="c" data-role="header">
+                        <h1>
+                            Confirmation
+                        </h1>
+                    </div>
+                    <div class="ui-content" role="main">
+                        <h1>Lancer l&rsquo;appel d&rsquo;urgence ?</h1>
+                        <button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onClick="getLocationOnce()">CONFIRMER</button>
+                        <a href="#home" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete" data-transition="slideUp">ANNULER</a>            
+                        <div id="secureResults"></div>
+                    </div>
+                </div>
+                <!-- 
+                <div id="player">
+                    <audio id="play" loop="loop" preload="auto" style="display:none;">
+                        <source src="sounds/ring.mp3" type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                -->
+            </div>
+            <div data-theme="c" data-role="footer" id="footer_cont1" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
+                <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        <div data-role="page" id="delayPop" data-transition="pop" data-theme="c">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+            	<p>&nbsp;</p>
+                <div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em;">
+                    <label for="delay">Temps d&rsquo;approche : </label>
+                    <select name="delay" id="delay" data-theme="c">
+                        <option selected value="7">d&eacute;lai</option>
+                        <option value="5">5 minutes</option>
+                        <option value="10">10 minutes</option>
+                        <option value="15">15 minutes</option>
+                        <option value="30">30 minutes</option>
+                    </select>
+                    <!-- 
+                    <a href="#" id="link2diary" data-role="button" data-iconpos="left" data-icon="check" data-theme="c" style="display:none;">Envoyer</a>
+                    -->
+                    <div id="hideCall">
+                        <button id="directCall" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onClick="directCall()">Envoyer</button>
+                    </div>
+                    <div id="delayConf"></div>
+                </div>
+            </div>
+            <div data-theme="c" data-role="footer" id="footer_cont2" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
+                <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        <div data-role="page" data-theme="c" id="cmd">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<button onClick="refreshCmd()" class="ui-btn ui-btn-b ui-icon-refresh ui-shadow-icon ui-btn-icon-notext ui-corner-all"></button>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+				<div id="dispo_cmd">                                            
+				</div>
+				<div id="warn_cmd">
+					<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>
+				</div>
+                <img src="visuels/p2.png" width="128"/>
+                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
+                    <h2 style="color:#f7b134; font-size:x-large;">Courses command&eacute;es</h2><hr>
+                    <div id="screen_bookings" style="text-align:left;">
+						<br><p><b>Pas de r&eacute;servation pour l&rsquo;instant. En attente...</b></p><br>
+                    </div>
+                    <hr>
+                </div>
+                <div class="cleaner"></div>
+				<a href="#history" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/historic_icon.png" width="90%"/><br>
+						Historique
+					</p>
+				</a>
+				<a href="#planning" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/planning_icon.png" width="90%"/><br>
+						Planning
+					</p>
+				</a>
+				<a href="#infos" data-transition="slide" style="width:26%;display:inline-block;margin:1% 3% 1% 3%;">
+					<p style="font-size: small;color:#333;">
+						<img src="visuels/info_icon.png" width="90%"/><br>
+						Infos monTaxi
+					</p>
+				</a>
+                <div class="cleaner"></div>
+            </div>
+            <div data-theme="c" data-role="footer" id="footer_cont3" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
+                <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        <div data-role="page" data-theme="c" id="planning">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
+                	<p class="auction"><b>Courses command&eacute;es</b></p>
+                </div>
+                <img src="visuels/p3.png" width="128"/>
+                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
+                    <div id="plan_cont">
+                    </div>
+               </div>
+            </div>
+            <div data-theme="c" data-role="footer" id="footer_cont4" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
+                <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        <div data-role="page" data-theme="c" id="history">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
+                	<p class="auction"><b>Historique des courses</b></p>
+                </div>
+                <img src="visuels/p3.png" width="128"/>
+                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
+                    <div id="hist_cont">
+                    </div>
+               </div>
+            </div>
+            <div data-theme="c" data-role="footer" id="footer_cont5" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
+                <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        <div data-role="page" data-theme="c" id="infos">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+                <img src="visuels/Infos_header.png" width="96%"/>
+                <div id="infos_cont"></div>
+            </div>
+            <div data-theme="c" data-role="footer" id="footer_cont6" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
+                <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        <div data-role="page" data-theme="c" id="manage">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+               <div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em; text-align: left;">
+                    <div data-role="collapsible-set" data-theme="c" data-content-theme="a">
+                        <div data-role="collapsible" data-collapsed="true" id="mod_collaps">
                             <h1>
-                                 Inscrivez-Vous 
+                                 Modifier mon compte
                             </h1>
                             <fieldset><legend></legend>
-							<div class="error"><span></span></div>
-                            <form method="POST" action="/" data-transition="slidefade" data-ajax="false" id="RegNameStep">
-								<h3 style="color:#333;">&Agrave; propos de vous : </h3>
-								<select name="civil">
-									<option selected value="Mr">Civilit&eacute;</option>
-									<option value="Mme">Mme</option>
-									<option value="Mlle">Mlle</option>
-									<option value="Mr">Mr</option>
-								</select>
-								<input type="text" name="nom" placeholder="Nom" maxlength="60" size="20" class="required"><em></em>
-								<input type="text" name="prenom" placeholder="Pr&eacute;nom" maxlength="60" size="20" class="required"><em></em>
-								<input type="tel" name="tel" placeholder="T&eacute;l&eacute;phone (Sans espace SVP)" maxlength="10" size="20" class="required"><em></em>
-								<input type="email" name="email" id="email" placeholder="Adresse email" maxlength="60" size="20" class="required email"><em></em>
-								<!-- <input type="email" name="confirmail" placeholder="Confirmez email SVP" maxlength="60" size="20" class="required email"><em></em> -->
-								<input type="tel" name="station" placeholder="Code Postal Commune Rattachement" maxlength="5" size="20" class="required"><em></em>
-                                <input type="submit" name="submit1" id="subNameStep" value="Continuer">
-							</form>
-                            <form method="POST" action="/" data-transition="slidefade" data-ajax="false" id="RegCabStep">
-								<h3 style="color:#333;">Infos Taxi : </h3>
-								<input type="tel" name="taxi" placeholder="ADS (N&deg taxi)" maxlength="6" size="20" class="required"><em></em>
-                                <input type="text" name="cpro" placeholder="N&deg carte professionnelle" maxlength="16" size="20" class="required"><em></em>
+                            <form method="POST" action="/" target="_parent" data-ajax="false" data-transition="slide" id="modmy">
+                                <p>Identifiant <input type="text" name="login" id="login" size="20" maxlength="12" value=""/></p>
+                                <label for="civil">
+                                    Civilit&eacute; : 
+                                </label>
+                                <select name="civil" id="civil">
+                                    <option selected value="">Civilit&eacute;</option>
+                                    <option value="Mme">Mme</option>
+                                    <option value="Mlle">Mlle</option>
+                                    <option value="Mr">Mr</option>
+                                </select>
+                                <input type="text" id="nom" name="nom" data-clear-btn="true" placeholder="Nom" maxlength="60" size="20" value="">
+                                <input type="text" id="prenom" name="prenom" data-clear-btn="true" placeholder="Pr&eacute;nom" maxlength="60" size="20" value="">
+                                <input type="tel" name="taxi" id="taxi" placeholder="ADS (N&deg taxi)" maxlength="6" size="20" class="required">
+                                <input type="tel" name="tel" id="tel" placeholder="T&eacute;l&eacute;phone (Sans espace SVP)" maxlength="10" size="20" class="required"><em></em>
+                                <input type="text" name="cpro" id="cpro" placeholder="N&deg; Carte Professionnelle" maxlength="32" size="20" class="required"><em></em>
+                                <input type="tel" name="station" id="station" placeholder="CP Commune Rattachement" maxlength="5" size="20" class="required"><em></em>
                                 <select name="type" id="type">
                                     <option selected value="Berline">Type de vehicule</option>
                                     <option value="Berline">Berline</option>
@@ -133,24 +551,47 @@
                                     <option value="Bleu">Bleu</option>
                                     <option value="Vert">Vert</option>
                                 </select><em></em>
-                                <input type="hidden" name="group" id="group" value="1"/>
-                                <fieldset data-role="controlgroup">
-                                    <legend>Langues parl&eacute;es</legend>
+                                <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+                                    <legend>
+                                        Langues parl&eacute;es
+                                    </legend>
                                     <input id="checkbox1" name="en" type="checkbox">
-                                    <label for="checkbox1">Anglais</label>
+                                    <label for="checkbox1">
+                                        Anglais
+                                    </label>
                                     <input id="checkbox2" name="sp" type="checkbox">
-                                    <label for="checkbox2">Espagnol</label>
+                                    <label for="checkbox2">
+                                        Espagnol
+                                    </label>
                                     <input id="checkbox3" name="it" type="checkbox">
-                                    <label for="checkbox3">Italien</label>
+                                    <label for="checkbox3">
+                                        Italien
+                                    </label>
                                     <input id="checkbox4" name="ru" type="checkbox">
-                                    <label for="checkbox4">Russe</label>
+                                    <label for="checkbox4">
+                                        Russe
+                                    </label>
                                     <input id="checkbox5" name="al" type="checkbox">
-                                    <label for="checkbox5">Allemand</label>
+                                    <label for="checkbox5">
+                                        Allemand
+                                    </label>
                                 </fieldset>
+                                <!-- 
+                                <div data-role="fieldcontain">
+                                    <select name="lang" id="lang" multiple="multiple">
+                                        <option selected value="">Langues parl&eacute;es</option>
+                                        <option value="en">Anglais</option>
+                                        <option value="sp">Espagnol</option>
+                                        <option value="it">Italien</option>
+                                        <option value="ru">Russe</option>
+                                        <option value="ge">Allemand</option>
+                                    </select>
+                                </div>
+                                -->
                                 <label for="cb">
                                     Paiement CB : 
                                 </label>
-                                <select name="cb" id="cb" data-theme="a" data-role="flipswitch">
+                                <select name="cb" id="cb" data-theme="c" data-role="flipswitch">
                                     <option value="0">
                                         Non
                                     </option>
@@ -161,7 +602,7 @@
                                 <label for="medic">
                                     Vehicule conventionn&eacute; : 
                                 </label>
-                                <select name="medic" id="medic" data-theme="a" data-role="flipswitch">
+                                <select name="medic" id="medic" data-theme="c" data-role="flipswitch">
                                     <option value="0">
                                         Non
                                     </option>
@@ -172,7 +613,7 @@
                                 <label for="animal">
                                     Acceptez-vous les animaux : 
                                 </label>
-                                <select name="animal" id="animal" data-theme="a" data-role="flipswitch">
+                                <select name="animal" id="animal" data-theme="c" data-role="flipswitch">
                                     <option value="0">
                                         Non
                                     </option>
@@ -180,155 +621,244 @@
                                         Oui
                                     </option>
                                 </select>
- 								<input type="hidden" name="tel" id="telcab" value=""/>
-								<input type="hidden" name="dep" id="depcab" value=""/>
-                                <input type="submit" name="submit2" id="subCabStep" value="Continuer">
-							</form>
-                            <form method="POST" action="/" data-transition="slidefade" data-ajax="false" id="RegCbStep">
-								<h3 style="color:#333;">Infos CB : </h3>
-								<select name="brand" id="brand">
-									<option selected value="CB">Type de Carte</option>
-									<option value="CB">CB</option>
-									<option value="VISA">VISA</option>
-									<option value="MASTERCARD">MASTERCARD</option>
-								</select><em></em>
-								<input type="tel" name="cbnum" placeholder="Num&eacute;ros CB (16)" maxlength="16" size="20" class="required"><em></em>
-								<!--
-								<label for="cbexp">Date Expiration : </label>
-								<input type="date" name="cbexp" id="cbexp" placeholder="Date Expiration" size="20" class="required"><em></em>
-								-->
-								<p>Expire fin :</p>
-								<select name="cbexpm" id="cbexpm">
-									<option value="" selected>Mois</option>
-									<option value="01">01- Janvier</option>
-									<option value="02">02- F&eacute;vrier</option>
-									<option value="03">03- Mars</option>
-									<option value="04">04- Avril</option>
-									<option value="05">05- Mai</option>
-									<option value="06">06- Juin</option>
-									<option value="07">07- Juillet</option>
-									<option value="08">08- Ao&ucirc;t</option>
-									<option value="09">09- Septembre</option>
-									<option value="10">10- Octobre</option>
-									<option value="11">11- Novembre</option>
-									<option value="12">12- D&eacute;cembre</option>
-								</select><em></em>
-								<select name="cbexpa" id="cbexpa">
-									<option value="" selected>Ann&eacute;e</option>
-									<option value="2015">2015</option>
-									<option value="2016">2016</option>
-									<option value="2017">2017</option>
-									<option value="2018">2018</option>
-									<option value="2019">2019</option>
-									<option value="2020">2020</option>
-									<option value="2021">2021</option>
-									<option value="2022">2022</option>
-									<option value="2023">2023</option>
-									<option value="2024">2024</option>
-								</select><em></em>
-								<input type="tel" name="cbval" placeholder="Criptogramme Visuel" maxlength="4" size="20" class="required"><em></em>
-                                <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
-                                    <legend>
-                                        Je certifie l&rsquo;exactitude des donn&eacute;es fournies et j&rsquo;accepte les 
-                                        <a href="docs/CGV.pdf" target="_blank">CGV</a> : 
-                                    </legend>
-                                    <input id="checkboxcgv" name="cgv" type="checkbox">
-                                    <label for="checkboxcgv">
-                                        Je certifie et accepte
-                                    </label><em></em>
-                                </fieldset>
-								<input type="hidden" name="tel" id="telcb" value=""/>
-                                <input type="hidden" name="dep" id="depcb" value=""/>
-                                <input type="submit" name="submit3" id="subCbStep" value="Envoyer">
+                                <input type="email" name="email" data-clear-btn="true" id="email" placeholder="Adresse email" maxlength="60" size="20" value="">
+                                <input type="email" name="confirmail" data-clear-btn="true" placeholder="Confirmez email SVP" maxlength="60" size="20" value="">
+                                <input type="hidden" name="modmy" value="1" />
+                                <input type="hidden" name="dep" id="depMod" value=""/>
+                                <input type="submit" name="submit" value="Envoyer">
                                 <p><b>
-                                    Vous recevrez par email, dans quelques instants, les identifiant et mot de passe qui vous permettront d'acc&egrave;der &agrave; votre compte.
+                                    Dans quelques minutes votre compte sera mis &agrave; jour avec ces informations.<br>
+                                    <span style="color:#F00;">Attention, si vous modifiez votre num&eacute;ro de T&eacute;l&eacute;phone, il devient votre nouvel identifiant.</span>
                                 </b></p>
                             </form>
                             </fieldset>    
-							<div id="done"></div>
+                    
                         </div>
-                        <div data-role="collapsible" data-collapsed="false">
+                        <div data-role="collapsible" data-collapsed="true">
                             <h1>
-                                 Identifiez-Vous 
+                                 Changer de mot de passe
                             </h1>
                             <fieldset><legend></legend>
-                            <form  action="/" method="post" name="id" id="login" data-ajax="false" data-transition="slidefade">
-                                <input type="tel" id="tel" name="log" size="20" maxlength="10" placeholder="Identifiant"/>
-                                <input type="password" id="pwd" name="pass" size="20" maxlength="16" placeholder="Mot de Passe"/>
-                                <input type="tel" name="dep" id="loginDep" value="" placeholder="Departement"/>
-                                <input type="submit" id="subLog" value=" Connexion "/>
+                            <form  action="/" method="post" name="id" id="change" data-ajax="false" data-transition="slide">
+                                <p>Votre identifiant <input type="tel" name="login" id="log" size="20" maxlength="12"/></p>
+                                <input type="hidden" name="reset" value="1" />
+                                <input type="hidden" name="dep" id="depPwd" value="34"/>
+                                <input type="submit" value=" Envoyer "/>
+                                <p><b>
+                                    Vous recevrez, dans quelques minutes, votre nouveau mot de passe qui vous permettra d'acc&egrave;der &agrave; votre compte.
+                                </b></p>
                             </form>
                             </fieldset>
                         </div>
-                        <div data-role="collapsible">
+						<div data-role="collapsible" data-collapsed="true">
+							<h1>Modifier CB</h1>
+							<select name="brand" id="brand">
+								<option selected value="CB">Type de Carte</option>
+								<option value="CB">CB</option>
+								<option value="VISA">VISA</option>
+								<option value="MASTERCARD">MASTERCARD</option>
+							</select><em></em>
+							<input type="tel" name="cbnum" id="cbnum" placeholder="Num&eacute;ros CB (16)" maxlength="16" size="20" class="required"><em></em>
+									<!--
+									<label for="cbexp">Date Expiration : </label>
+									<input type="date" name="cbexp" id="cbexp" placeholder="Date Expiration" size="20" class="required"><em></em>
+									-->
+									<p>Expire fin :</p>
+									<select name="cbexpm" id="cbexpm">
+										<option value="" selected>Mois</option>
+										<option value="01">01- Janvier</option>
+										<option value="02">02- F&eacute;vrier</option>
+										<option value="03">03- Mars</option>
+										<option value="04">04- Avril</option>
+										<option value="05">05- Mai</option>
+										<option value="06">06- Juin</option>
+										<option value="07">07- Juillet</option>
+										<option value="08">08- Ao&ucirc;t</option>
+										<option value="09">09- Septembre</option>
+										<option value="10">10- Octobre</option>
+										<option value="11">11- Novembre</option>
+										<option value="12">12- D&eacute;cembre</option>
+									</select><em></em>
+									<select name="cbexpa" id="cbexpa">
+										<option value="" selected>Ann&eacute;e</option>
+										<option value="2015">2015</option>
+										<option value="2016">2016</option>
+										<option value="2017">2017</option>
+										<option value="2018">2018</option>
+										<option value="2019">2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+									</select><em></em>
+							<input type="tel" name="cbval" id="cbval" placeholder="Criptogramme Visuel" maxlength="4" size="20" class="required"><em></em>
+							<button onClick="modPay()" id="modPay">Modifier</button>
+						</div>
+                        <div data-role="collapsible" data-collapsed="true">
                             <h1>
-                                 Mot de passe oubli&eacute;
+                                 Facturation pour le mois en cours
                             </h1>
-                            <fieldset><legend></legend>
-                            <form  action="/" method="post" name="forget" id="forget" data-ajax="false" data-transition="slidefade">
-                                <input type="tel" name="login" size="20" maxlength="10" placeholder="Identifiant"/>
-                                <input type="email" name="mail" size="32" maxlength="60" placeholder="L&rsquo;email de votre compte"/>
-                                <input type="tel" name="dep" id="depForgot" placeholder="Departement"/>
-                                <input type="submit" id="subFor" value=" Envoyer "/>
-                           </form>
-                            </fieldset>
-                            <p><b>
-                                Vous recevrez, dans quelques instants, vos identifiant et mot de passe par email.
-                            </b></p>
+                            <div id="billing">
+                            </div>
                         </div>
-                    </div>    
+                        <div data-role="collapsible" data-collapsed="true">
+                            <h1>
+                                 Voir mes notes moyennes
+                            </h1>
+                            <div id="myRates">
+                            </div>
+                        </div>
+                        <div data-role="collapsible" data-collapsed="true">
+                            <h1>
+                                CGV 
+                            </h1>
+                            <a href="#" onClick="cgv()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-info" data-transition="slide"><b>Consulter les CGV</b></a>
+                            <a href="http://taximedia.fr/client/docs/CGV.pdf" target="_blank" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-action" data-transition="slide"><b>T&eacute;l&eacute;charger les CGV</b></a>
+                        </div>
+                        <div data-role="collapsible" data-collapsed="true">
+                            <h1>
+                                Partager monTaxi
+                            </h1>
+                            <table width="100%" border="0">
+                                <thead><tr><th width="90%"></th><th width="10%"></th></tr></thead>
+                                <tbody>
+                                <tr><td>
+                                    <input type="tel" id="telShare" data-clear-btn="true" placeholder="Tel" maxlength="60" size="20" value="">
+                                </td><td>
+                                    <input type="button" data-icon="edit" data-iconpos="notext" value="Geoloc" onClick="contactPick()"/>
+                                </td></tr>
+                                </tbody>
+                            </table>
+                            <a href="#" onClick="Share()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>App Particuliers</b></a>
+                            <a href="#" onClick="ShareArt()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>App Artisans</b></a>
+                            <a href="#" onClick="SharePro()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>App Client Pro</b></a>
+                        </div>
+                    </div>
+                    <button onClick="goScan()" class="ui-btn ui-btn-icon-left ui-icon-camera ui-shadow-icon ui-corner-all">Scanner un QrCode</button>
+
                 </div>
-                <!-- HERE COMES ALL ANSWERS CONCERNING BOTH LOGIN AND REGISTERING METHODS -->
-                <div data-role="popup" data-theme="b" id="answer" data-dismissible="true" data-overlay-theme="b">
-					<a href="#portal" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
-                    <div data-theme="a" data-role="header">
-                        <h1>
-                            R&eacute;ponse
-                        </h1>
+                <div id="returns"></div>
+                <div data-role="popup" data-theme="c" id="popSms" data-dismissible="true">
+ 					<a href="#manage" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
+                   <div data-theme="c" data-role="header">
+                        <p style="font-size:21px;text-align:center;"><b>
+                            Partage SMS
+                        </b></p>
                     </div>
                     <div class="ui-content" role="main">
-						<div id="returns"></div>
+                        <div id="smsReturn"></div>
                     </div>
                 </div>
-                <a href="#secureDialog" data-rel="popup" data-position-to="window" data-role="button" class="secure-bt" data-theme="b" data-icon="alert">Bouton d&rsquo;urgence</a>
-                <div data-role="popup" data-theme="a" id="secureDialog" data-dismissible="false" data-overlay-theme="b">
-                    <div data-theme="a" data-role="header">
-                        <h1>
-                            Confirmation
-                        </h1>
+                <div data-role="popup" data-theme="c" id="returnsBox" data-dismissible="true">
+ 					<a href="#manage" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
+                   <div data-theme="c" data-role="header">
+                        <p style="font-size:21px;text-align:center;"><b>
+                            Modification CB
+                        </b></p>
                     </div>
                     <div class="ui-content" role="main">
-                        <h1>Lancer l&rsquo;appel d&rsquo;urgence ?</h1>
-                        <input type="button" data-theme="b" data-icon="check" onClick="getLocationOnce()" value="CONFIRMER"/>
-                        <a href="#portal" data-rel="back" data-icon="delete" data-role="button" data-transition="slideUp" data-theme="a">ANNULER</a>            
-                        <div id="secureResults"></div>
+                        <div id="returnsVisa"></div>
                     </div>
-                </div>        
+                </div>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont" data-position="fixed">
-				<div class="ui-bar-a ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des information monTaxi en cours.</b></marquee></div>
+            <div data-theme="c" data-role="footer" id="footer_cont7" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
             </div>
         </div>
         
-        <div data-role="page" data-theme="a" id="urgency">
-            <div data-theme="a" data-role="header" data-position="fixed">
+		<div id="directions_map" data-role="page" data-theme="c">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+			<!--
+			<div data-role="header">
+            	<a href="#home" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-back ui-btn-inline"><h1><b>Accueil</b></h1></a>
+                <a href="#homepanel" id="mapPanel_poper" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><h1><b>Menu</b></h1></a>
+			</div>
+            <div class="spacer"></div><div class="spacer"></div><div class="spacer"></div>
+			-->
+			<div class="ui-content" role="main">	
+				<div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1.5em;">
+					<p>
+						<label for="from">D&eacute;part</label>
+						<input id="from" data-clear-btn="true" type="text" value="" />
+					</p>
+					<p>
+						<label for="to">Arriv&eacute;e</label>
+						<input id="to" data-clear-btn="true" type="text" value="" />                        
+					</p>
+					<a id="submit" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-search">Trouver l&rsquo;itin&eacute;raire</a>
+                    <div id="infos_map"></div>
+					<div id="map_canvas_1" style="height:260px;"></div>
+				</div>
+				<div id="results_gps" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="display:none;">
+					<div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined">Results</div>
+					<div id="directions"></div>
+					<div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-bottom ui-btn-up-undefined"></div>
+				</div>
+			</div>
+		</div>
+
+        <div data-role="page" data-theme="c" id="toolate">
+			<div data-role="header" data-position="fixed" class="header">
+				<table width="100%" border="0" class="header_cont">
+					<thead><tr><th width="50%"></th><th width="34%"></th><th width="16%"></th></tr></thead>
+					<tbody>
+					<tr><td>
+						<img src="visuels/header.png" width="100%" style="max-width:500px;"/>
+					</td><td>
+						<p>&nbsp;</p>
+					</td><td align="center">
+						<a href="#homepanel" id="panel_poper" data-role="none" style="width:90%;">
+							<img src="visuels/ico_menu.png" width="100%" style="max-width:175px;"/>
+						</a>
+					</td></tr>
+					</tbody>
+				</table>
+			</div>
+            <div class="ui-content" role="main">
+                <div id="late_cont" class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
+               </div>                    
+            </div>
+            <div data-theme="c" data-role="footer" id="footer_cont8" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations monTaxi en cours.</b></marquee></div>
+                <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        
+        <div data-role="page" data-theme="c" id="urgency">
+            <div data-theme="c" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0; color: #F00;">
                 	URGENCE
                 </h1>
             </div>
             <div class="ui-content" role="main">
-                <div id="urgent" class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em;">
+                <div id="urgent" class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
                 	<h1 style="color: #F00;">Proc&eacute;dure d&rsquo;appel d&rsquo;urgence activ&eacute;e.</h1>
-                    <input type="button" data-theme="c" data-icon="check" onClick="stopSecureCall()" value="ARRETER"/>
+                    <button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onClick="stopSecureCall()">ARRETER</button>
                </div>                    
                 <div id="urgencyResults"></div>
             </div>
-            <div data-theme="a" data-role="footer" id="footer_cont2" data-position="fixed">
-				<div class="ui-bar-a ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Proc&eacute;dure d&rsquo;appel d&rsquo;urgence activ&eacute;e.</b></marquee></div>
+            <div data-theme="c" data-role="footer" data-position="fixed">
+				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Proc&eacute;dure d&rsquo;appel d&rsquo;urgence activ&eacute;e.</b></marquee></div>
             </div>
         </div>
-        
-    </center>
-    </body>
+                
+        </center>
+	</body>
 </html>

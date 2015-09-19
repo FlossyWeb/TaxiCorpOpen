@@ -32,6 +32,7 @@ var scanner;
 
 // localNotifications
 var notificationId = 1;
+var badgeNumber = 0;
 var badgeNumber1 = 0;
 var badgeNumber2 = 0;
 
@@ -190,8 +191,11 @@ $( '#planning' ).live( 'pagebeforeshow',function(event){
 $( '#cmd' ).live( 'pagebeforeshow',function(event){
 	$.mobile.loading( "show" );
 	$.post("https://www.mytaxiserver.com/appserver/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: dep, mngid: mngid, group: group }, function(data){
-		$("#screen_bookings").empty().append(data);
-		$("#screen_bookings").trigger('create');
+		if (data != 0)
+		{
+			$("#screen_bookings").empty().append(data);
+			$("#screen_bookings").trigger('create');
+		}
 		//navigator.notification.alert(data);
 	}).always(function() { $.mobile.loading( "hide" ); });
 });
@@ -227,6 +231,10 @@ $('#manage').live('pagecreate', function() {
 	$('#log').val(tel);
 	$.post("https://www.mytaxiserver.com/appclient/billing.php", { taxi: taxi, pass: pass, dep: dep, mngid: mngid }, function(data){
 		$("#billing").empty().append(data);
+		//navigator.notification.alert(data);
+	});
+	$.post("https://www.mytaxiserver.com/appclient/myrates.php", { tel: tel, pass: pass, dep: dep, mngid: mngid }, function(data){
+		$("#myRates").empty().append(data);
 		//navigator.notification.alert(data);
 	});
 });
@@ -297,11 +305,6 @@ function get_coords(position)
 	lng = position.coords.longitude;
 	//alert('Located: '+lat+' , '+lng);
 	if((lat!=previousLat) && (lng!=previousLng)) {
-		/*
-		{ "timestamp":"1430076493",	"operator":"neotaxi", "taxi":"9cf0ebfa-dd37-45c4-8a80-60db584535d8", "lat":"2.3885205388069153", "lon":"48.843948737043036", "device":"phone", "status":"0", "version":"1", "hash":"2fd4e1c67a2d28fced849ee1bb76e7391b93eb12" }
-		sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
-		*/
-		//var stampDot = new Date(Date.UTC()).getTime() / 1000; // float UTC timestamp in seconds
 		var stampDot = new Date().getTime() / 1000; // float timestamp in seconds
 		var stamp = parseInt(stampDot); // timestamp in seconds
 		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"2"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
@@ -309,7 +312,7 @@ function get_coords(position)
 		//var payload = 'JSON.stringify({"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":"'+geoHash+'"})';
 		//alert(JSON.stringify(payload));
 		udptransmit.sendMessage(payload);
-		$.post("https://www.mytaxiserver.com/appclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }).always(function(data) {
+		$.post("https://www.mytaxiserver.com/appclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }, function(data) {
 			//alert('Sent:'+lat+' , '+lng);
 		});
 	}
@@ -384,7 +387,9 @@ function checkCmd() {
 			$('.ordersjob').empty().append(data);
 			navigator.notification.beep(2);
 			navigator.notification.vibrate(1000);
-			//var badgeNumber = badgeNumber1+badgeNumber2;
+			//badgeNumber2=data;
+			badgeNumber2=1;
+			badgeNumber = badgeNumber1+badgeNumber2;
 			if(parseInt(data)>1) { var showing=data+" courses en commande sont disponibles !";}
 			else { var showing="Une course en commande est disponible !";}
 			cordova.plugins.notification.local.schedule({
@@ -407,9 +412,12 @@ function checkCmd() {
 }
 function refreshCmd() {
 	$.post("https://www.mytaxiserver.com/appserver/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: dep, mngid: mngid, group: group, zip: station }, function(data){
-		$.mobile.loading( "show" );
-		$("#screen_bookings").empty().append(data);
-		$("#screen_bookings").trigger('create');
+		if (data != 0)
+		{
+			$.mobile.loading( "show" );
+			$("#screen_bookings").empty().append(data);
+			$("#screen_bookings").trigger('create');
+		}
 	}).always(function() { $.mobile.loading( "hide" ); });
 }
 function dispoCheck()
@@ -681,7 +689,7 @@ function help()
 function cgv()
 {
 	//window.plugins.childBrowser.showWebPage('http://taximedia.fr/client/docs/CGV.pdf', { showLocationBar: true });
-	window.open('http://taximedia.fr/client/docs/CGV.pdf','_blank','location=false,enableViewportScale=yes,closebuttoncaption=Fermer');
+	window.open('http://taximedia.fr/docs/CGV.pdf','_blank','location=false,enableViewportScale=yes,closebuttoncaption=Fermer');
 }
 function alertDismissed()
 {
