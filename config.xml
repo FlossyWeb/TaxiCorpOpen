@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.taxibleuservices.montaxicorpopen"
         version   = "1.5.0">
-    <name>MonTaxi Chauffeur Open</name>
+    <name>MonTaxi Corp Open</name>
 
     <description>
         MonTaxi Officiel Version Artisans en OpenData.
@@ -12,6 +12,14 @@
     <author href="http://flossyweb.com" email="contact@flossyweb.com">
         FRANCOIS-REGIS SIMON
     </author>
+
+    <preference name="phonegap-version" value="cli-5.1.1" />
+    <preference name="orientation"      value="default" />
+    <preference name="target-device"    value="universal" />
+    <preference name="fullscreen"       value="false" />
+	<preference name="prerendered-icon" value="false" />
+	<preference name="show-splash-screen-spinner" value="false" />
+	<preference name="detect-data-types" value="false" />
 
     <gap:plugin name="cordova-plugin-device" source="npm" />
 	<gap:plugin name="cordova-plugin-camera" source="npm" />
@@ -37,9 +45,9 @@
 	<gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />
 	<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
 	<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" />
-	<!-- <gap:plugin name='org.crosswalk.engine' version='1.3.0' source='pgb' /> -->
+	<gap:plugin name='org.crosswalk.engine' version='1.3.0' source='pgb' />
 	<gap:plugin name="nl.x-services.plugins.launchmyapp">
-		<param name="URL_SCHEME" value="montaxidriveropen" />
+		<param name="URL_SCHEME" value="montaxiopendriver" />
 	</gap:plugin>
 
     <icon src="icon.png" />
