@@ -76,9 +76,11 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 	if(data.done) {
 		$.post("https://www.mytaxiserver.com/appclient/open_enroll_app.php", { tel: tel, insee: insee, dep: dep, mngid: mngid, ads: ads, cpro: cpro, imat: imat}, function(data) {
 			taxi_id = data.taxi_id;
+			$.localStorage.setItem('taxi_id', data.taxi_id);
 			openStatus = data.status;
 			openDataInit=true;
 			//alert(taxi_id+' - '+openStatus+' - '+openDataInit);
+			dispoCheck();
 		}, "json");
 	}
 });
@@ -749,7 +751,7 @@ if ( app ) {
 		udptransmit.initialize("46.105.34.86", 80);
 		//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 		getLocation(); // Launching getLocation anyway !!
-		setTimeout('update()', 2000);
+		//setTimeout('update()', 2000);
 		checkCmd();
 		cordova.plugins.notification.local.clearAll(function() {
 			//alert("All notifications cleared");
@@ -1023,7 +1025,6 @@ $(document).on( 'pagecreate', function() {
 	else {
 		$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 	}
-	dispoCheck();
 	//Dispo_On(); 
 	footer();
 	dep = $.localStorage.getItem('dep');
