@@ -49,6 +49,7 @@
 	<gap:plugin name="nl.x-services.plugins.launchmyapp">
 		<param name="URL_SCHEME" value="montaxiopendriver" />
 	</gap:plugin>
+	<gap:plugin name="edu.uic.travelmidwest.cordova.udptransmit" />
 
     <icon src="icon.png" />
 	<icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
