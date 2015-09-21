@@ -81,6 +81,7 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 			openDataInit=true;
 			//alert(taxi_id+' - '+openStatus+' - '+openDataInit);
 			dispoCheck();
+			//Dispo_On();
 		}, "json");
 	}
 });
@@ -563,6 +564,7 @@ function directCall()
 				setTimeout( function () {
 					checkCustomerConfirm(dep, query_string);
 				}, 30000);
+				//Dispo_Off();
 				 
 				 break;
 			 case '#toolate':
@@ -623,6 +625,9 @@ function checkCustomerConfirm(d, q)
 			else alert(data);
 			$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide"} );
 			//return false;
+		}
+		else {
+			Dispo_Off();
 		}
 	});
 }
