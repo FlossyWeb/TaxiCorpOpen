@@ -13,7 +13,8 @@
         FRANCOIS-REGIS SIMON
     </author>
 
-    <preference name="phonegap-version" value="cli-5.1.1" />
+    <preference name="phonegap-version" value="3.7.0" />
+    <!-- <preference name="phonegap-version" value="cli-5.1.1" /> -->
     <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
@@ -37,7 +38,7 @@
 		<string>CELA PERMETTRA AUX USAGERS DE CONNAITRE VOTRE POSITION.</string>
 	</gap:config-file>
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
-	<gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" />
+	<!-- <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" /> -->
 	<gap:plugin name="nl.x-services.plugins.calendar" />
 	<gap:plugin name="com.phonegap.plugins.barcodescanner" />
 	<gap:plugin name="hu.dpal.phonegap.plugins.contactnumberpicker" version="0.1.1" />
@@ -45,7 +46,7 @@
 	<gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />
 	<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
 	<gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.8.1" />
-	<gap:plugin name='org.crosswalk.engine' version='1.3.0' source='pgb' />
+	<!-- <gap:plugin name='org.crosswalk.engine' version='1.3.0' source='pgb' /> -->
 	<gap:plugin name="nl.x-services.plugins.launchmyapp">
 		<param name="URL_SCHEME" value="montaxiopendriver" />
 	</gap:plugin>
