@@ -306,14 +306,14 @@ function get_coords(position)
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
 	//alert('Located: '+lat+' , '+lng);
+	var stampDot = new Date().getTime() / 1000; // float timestamp in seconds
+	var stamp = parseInt(stampDot); // timestamp in seconds
+	var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"2"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
+	var payload = '{"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":"'+geoHash+'"}';
+	//var payload = 'JSON.stringify({"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":"'+geoHash+'"})';
+	//alert(JSON.stringify(payload));
+	udptransmit.sendMessage(payload);
 	if((lat!=previousLat) && (lng!=previousLng)) {
-		var stampDot = new Date().getTime() / 1000; // float timestamp in seconds
-		var stamp = parseInt(stampDot); // timestamp in seconds
-		var geoHash = sha1(stamp+"montaxi"+taxi_id+lat+lng+"phone"+"0"+"2"+api_key); //sha1(concat(timestamp, operator, taxi, lat, lon, device, status, version, api_key))
-		var payload = '{"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":"'+geoHash+'"}';
-		//var payload = 'JSON.stringify({"timestamp":"'+stamp+'","operator":"montaxi","taxi":"'+taxi_id+'","lat":"'+lat+'","lon":"'+lng+'","device":"phone","status":"0","version":"2","hash":"'+geoHash+'"})';
-		//alert(JSON.stringify(payload));
-		udptransmit.sendMessage(payload);
 		$.post("https://www.mytaxiserver.com/appclient/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: dep }, function(data) {
 			//alert('Sent:'+lat+' , '+lng);
 		});
@@ -560,6 +560,9 @@ function directCall()
 				$.sessionStorage.setItem('cell', data.cell);
 				$.sessionStorage.setItem('cmd', 0);
 				$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
+				setTimeout( function () {
+					checkCustomerConfirm(dep, query_string);
+				}, 30000);
 				 
 				 break;
 			 case '#toolate':
@@ -610,6 +613,18 @@ function diaryCall(query_string)
 				 break;
 		}					
 	}, "json").always(function() { Sound_On();});
+}
+function checkCustomerConfirm(d, q)
+{
+	$.post("https://www.mytaxiserver.com/appserver/open_status.php?dep=" + d + "&check=0" , query_string, function(data){ 
+		if (data != 0)
+		{
+			if(app) navigator.notification.alert(data, alertDismissed, 'MonTaxi', 'OK');
+			else alert(data);
+			$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide"} );
+			//return false;
+		}
+	});
 }
 // Urgence call => Danger zone
 function getLocationOnce()
@@ -1012,7 +1027,7 @@ $(document).on( 'pagecreate', function() {
 	$( "body>[data-role='panel']" ).panel().enhanceWithin();
 	if(!app) {
 		getLocation();
-		setTimeout('update()', 2000);
+		//setTimeout('update()', 2000);
 		$.post("https://www.mytaxiserver.com/appclient/polling.php", {}, function(data) {
 			pollingTime = data.polling;
 		}, "json").always(function(data) {
