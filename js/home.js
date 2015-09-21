@@ -343,7 +343,7 @@ function UDPTransmissionError(error) {
 function update()
 {
 	dispo = $.sessionStorage.getItem('dispo');
-	$.post("https://www.mytaxiserver.com/appserver/open_get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: dep, mngid: mngid, group: group }, function(data){ 
+	$.post("https://www.mytaxiserver.com/appserver/open_get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: dep, mngid: mngid, group: group, lat: lat, lng: lng }, function(data){ 
 		if (data != 0)
 		{
 			$("#screen_job").empty().append(data);
