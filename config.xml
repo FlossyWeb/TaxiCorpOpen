@@ -37,7 +37,7 @@
 		<string>CELA PERMETTRA AUX USAGERS DE CONNAITRE VOTRE POSITION.</string>
 	</gap:config-file>
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
-	<!-- <gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" /> -->
+	<gap:plugin name="cordova-plugin-whitelist" source="npm" version="1.0.0" />
 	<gap:plugin name="nl.x-services.plugins.calendar" />
 	<gap:plugin name="com.phonegap.plugins.barcodescanner" />
 	<gap:plugin name="hu.dpal.phonegap.plugins.contactnumberpicker" version="0.1.1" />
