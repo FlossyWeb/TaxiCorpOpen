@@ -410,17 +410,22 @@ function checkCmd() {
 			cordova.plugins.notification.local.clear(2, function() {
 				//alert("done");
 			});
+			$('.orders').removeClass('badge');
+			$('.ordersjob').removeClass('badge');
+			$('.orders').empty();
+			$('.ordersjob').empty();
 		}
 	}).always(function(data) {
 		setTimeout('checkCmd()', 300000);
 	});
 }
 function refreshCmd() {
+	$.mobile.loading( "show" );
+	$("#screen_bookings").empty();
 	$.post("https://www.mytaxiserver.com/appserver/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: dep, mngid: mngid, group: group, zip: station }, function(data){
 		if (data != 0)
 		{
-			$.mobile.loading( "show" );
-			$("#screen_bookings").empty().append(data);
+			$("#screen_bookings").append(data);
 			$("#screen_bookings").trigger('create');
 		}
 	}).always(function() { $.mobile.loading( "hide" ); });
@@ -540,6 +545,9 @@ function cancelCall(query_string)
 	$.post("https://www.mytaxiserver.com/appserver/open_diary_app_dcvp.php?dep="+dep, query_string, function(data){ 
 		$.mobile.pageContainer.pagecontainer("change", "#jobs_taker", { transition: "slide"} );
 	}, "json").always(function() { $.mobile.loading( "hide" ); });
+	cordova.plugins.notification.local.clear(1, function() {
+		// Cleaning direct job notification
+	});
 }
 function directCall()
 {
@@ -578,6 +586,9 @@ function directCall()
 				 break;
 		}					
 	}, "json").always(function() { Sound_On();});
+	cordova.plugins.notification.local.clear(1, function() {
+		// Cleaning direct job notification
+	});
 }
 // Diary call when accepting cmd jobs or refusing jobs
 function diaryCall(query_string)
@@ -615,10 +626,13 @@ function diaryCall(query_string)
 				 break;
 		}					
 	}, "json").always(function() { Sound_On();});
+	cordova.plugins.notification.local.clear(2, function() {
+		// Cleaning cmd notification
+	});
 }
 function checkCustomerConfirm(d, q)
 {
-	$.post("https://www.mytaxiserver.com/appserver/open_status.php?dep=" + d + "&check=0" , query_string, function(data){ 
+	$.post("https://www.mytaxiserver.com/appserver/open_status.php?dep=" + d + "&check=0" , q, function(data){ 
 		if (data != 0)
 		{
 			if(app) navigator.notification.alert(data, alertDismissed, 'MonTaxi', 'OK');
@@ -759,10 +773,25 @@ if ( app ) {
 		cordova.plugins.backgroundMode.configure({
 			text:'App toujours en fonction, nous vous informons des courses en cours...'
 		});
-		// Called when background mode has been activated
+		// Called when background mode has been activated or deactivated
 		cordova.plugins.backgroundMode.onactivate = function () {
 			Sound_Off();
+			cordova.plugins.notification.local.clear(3, function() {});
 		}
+		cordova.plugins.backgroundMode.ondeactivate = function() {
+			cordova.plugins.notification.local.schedule({
+				id: 3,
+				title: "Alerte execution MonTaxi",
+				text: "Votre application MonTaxi va cesser de fonctionner en arrière plan.",
+				led: "E7B242",
+				badge: 0
+			});
+			//navigator.notification.alert("Bon retour sur l'application.", backFromBackGround, 'MonTaxi', 'Relancer');
+		}
+		cordova.plugins.notification.local.on("click", function (notification, state) {
+			//alert(notification.id + " was clicked");
+			if(notification.id=='3') backFromBackGround();
+		}, this);
 		if (typeof window.udptransmit == 'undefined') {
 			alert("udpTransmit is undefined !!");
 		}
@@ -790,6 +819,9 @@ function onResume() {
 }
 function onPause() {
 	Sound_Off();
+}
+function backFromBackGround() {
+	document.location.href='home.html';
 }
 var scanSuccess = function (result) {
 	var textFormats = "QR_CODE DATA_MATRIX";
