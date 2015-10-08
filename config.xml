@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.taxibleuservices.montaxicorpopen"
         version   = "1.6.0">
-    <name>MonTaxi Corp le.taxi edition</name>
+    <name>MonTaxi Chauffeur le.taxi edition</name>
 
     <description>
         MonTaxi Officiel Version Artisans en OpenData.
