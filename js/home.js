@@ -21,7 +21,7 @@ var cell = $.sessionStorage.setItem('cell', '');
 var cmd = $.sessionStorage.setItem('cmd', 0);
 var query_string = $.sessionStorage.setItem('query_string', '');
 var delay = 10;
-var pollingTime = 3000;
+var pollingTime = 2000;
 
 // Lecteur audio
 var my_media = null;
@@ -61,7 +61,7 @@ if($.localStorage.getItem('pass')!='true')
 {
 	document.location.href='index.html';
 }
-$.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, mngid: mngid, dep: dep}, function(data) {
+$.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, mngid: mngid, log: tel, pass: pwd, dep: dep}, function(data) {
 	if(data.done) {
 		insee = data.insee;
 		ads = data.ads;
@@ -69,8 +69,11 @@ $.post("https://www.mytaxiserver.com/appclient/open_login_app.php", { tel: tel, 
 		imat = data.imat;
 		//alert(ads+' - '+insee+' - '+cpro+' - '+imat);
 	}
-	else {
-		alert('Pas de correspondance dans la table opendata_interface !!', alertDismissed, 'MonTaxi Erreur', 'OK');
+	//else alert('Pas de correspondance dans la table opendata_interface !!', alertDismissed, 'MonTaxi Erreur', 'OK');
+	if (data.badid)
+	{
+		$.localStorage.setItem('pass', 0);
+		document.location.href='index.html';
 	}
 }, "json").done(function(data) { 
 	if(data.done) {
@@ -136,7 +139,7 @@ $('#directions_map').live('pagecreate', function() {
 							if ( status === 'OK' ) {
 								$('#from').val(results[0].formatted_address);
 								var rdv = $.sessionStorage.getItem('rdv');
-								var gmapLink = '<a href="#" onClick="openSomeUrl(\'http://maps.google.com/maps?daddr='+rdv+'&saddr='+results[0].formatted_address+'&directionsmode=driving\')" class="ui-btn  ui-btn-b ui-corner-all ui-shadow ui-icon-navigation ui-btn-icon-left">Ouvrir dans Maps</a>';
+								var gmapLink = '<a href="#" onClick="openSomeUrl(\'http://maps.google.com/maps?daddr='+rdv+'&saddr='+results[0].formatted_address+'&directionsmode=driving\')" class="ui-btn  ui-btn-c ui-corner-all ui-shadow ui-icon-navigation ui-btn-icon-left">Ouvrir dans Maps</a>';
 								setTimeout(function() { 
 									$("#infos_map").append(gmapLink);
 								}, 1000);
@@ -645,6 +648,28 @@ function checkCustomerConfirm(d, q)
 		}
 	});
 }
+function callIncident(irdv, ihail, iop, icell, istatus)
+{ // callIncident(\''.$rdv.'\', \''.$hail_id.'\', \''.$operator.'\', \''.$cell.'\', \''.$status.'\')
+	$.post("https://www.mytaxiserver.com/appserver/open_incident.php" , { rdvpoint: irdv, hail_id: ihail, operator: iop, cell: icell, status: istatus, db: 'true'}, function(data){ 
+		if (data.ok)
+		{
+			var number = icell;
+			var message = "Le taxi "+taxi+" ne pourra venir vous chercher à cause d'un incident.";
+			var intent = ""; //leave empty for sending sms using default intent
+			var success = function () {
+			};
+			var error = function (e) {
+			};
+			sms.send(number, message, intent, success, error);
+			//$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide"} );
+			//return false;
+		}
+		else {
+			if(app) navigator.notification.alert("Erreur: L'incident n'a pas été déclaré.", alertDismissed, 'MonTaxi', 'OK');
+			else alert("Erreur: L'incident n'a pas été déclaré.");
+		}
+	}, "json");
+}
 // Urgence call => Danger zone
 function getLocationOnce()
 {
@@ -779,6 +804,7 @@ if ( app ) {
 			cordova.plugins.notification.local.clear(3, function() {});
 		}
 		cordova.plugins.backgroundMode.ondeactivate = function() {
+			// Sadly this event is fired anytime the backgroundMode is deactivated including when the app is just pushed back from back to foreground !! Sad but true ;-)
 			cordova.plugins.notification.local.schedule({
 				id: 3,
 				title: "Alerte execution MonTaxi",
