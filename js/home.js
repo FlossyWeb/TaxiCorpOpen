@@ -822,8 +822,11 @@ if ( app ) {
 			alert("udpTransmit is undefined !!");
 		}
 		// Initialising UDP Connexion once...
-		//udptransmit.initialize("192.168.1.42", 80);
-		udptransmit.initialize("46.105.34.86", 80);
+		udptransmit.initialize("51.254.243.15", 80);
+		//udptransmit.initialize("geoloc.dev.api.taxi", 80);
+		//udptransmit.initialize("geoloc.test.api.taxi", 80);
+		//udptransmit.initialize("geoloc.api.taxi", 80);
+		::udptransmit.initialize("46.105.34.86", 80);
 		//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 		getLocation(); // Launching getLocation anyway !!
 		//setTimeout('update()', 2000);
