@@ -792,9 +792,9 @@ if ( app ) {
 		$.post("https://www.mytaxiserver.com/appclient/polling.php", {}, function(data) {
 			pollingTime = data.polling;
 			// Initialising UDP Connexion once...
-			//udptransmit.initialize(data.udpserver, 80);
+			udptransmit.initialize(data.udpserver, 80);
 			//udptransmit.initialize("51.254.243.15", 80);
-			udptransmit.initialize("geoloc.dev.api.taxi", 80);
+			//udptransmit.initialize("geoloc.dev.api.taxi", 80);
 			//udptransmit.initialize("geoloc.test.api.taxi", 80);
 			//udptransmit.initialize("geoloc.api.taxi", 80);
 			//udptransmit.initialize("46.105.34.86", 80);
