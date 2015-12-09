@@ -54,6 +54,7 @@ var imat = $.localStorage.getItem('imat');
 var taxi_id = $.localStorage.getItem('taxi_id');
 var openStatus;
 var openDataInit=false;
+var geoserver='188.165.50.190';
 
 var mobileDemo = { 'center': '43.615945,3.876743', 'zoom': 10 };
 
@@ -790,8 +791,18 @@ if ( app ) {
 		scanner = cordova.require("cordova/plugin/BarcodeScanner");
 		$.post("https://www.mytaxiserver.com/appclient/polling.php", {}, function(data) {
 			pollingTime = data.polling;
+			// Initialising UDP Connexion once...
+			//udptransmit.initialize(data.udpserver, 80);
+			//udptransmit.initialize("51.254.243.15", 80);
+			udptransmit.initialize("geoloc.dev.api.taxi", 80);
+			//udptransmit.initialize("geoloc.test.api.taxi", 80);
+			//udptransmit.initialize("geoloc.api.taxi", 80);
+			//udptransmit.initialize("46.105.34.86", 80);
+			//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 		}, "json").always(function(data) {
 			setTimeout('update()', 2000);
+		}).fail(function (jqXHR, textStatus, errorThrown) {
+			udptransmit.initialize(geoserver, 80);
 		});
 		// Enable background mode
 		cordova.plugins.backgroundMode.enable();
@@ -821,13 +832,6 @@ if ( app ) {
 		if (typeof window.udptransmit == 'undefined') {
 			alert("udpTransmit is undefined !!");
 		}
-		// Initialising UDP Connexion once...
-		udptransmit.initialize("51.254.243.15", 80);
-		//udptransmit.initialize("geoloc.dev.api.taxi", 80);
-		//udptransmit.initialize("geoloc.test.api.taxi", 80);
-		//udptransmit.initialize("geoloc.api.taxi", 80);
-		//udptransmit.initialize("46.105.34.86", 80);
-		//udptransmit.initialize("geoloc.opendatataxi.fr", 80);
 		getLocation(); // Launching getLocation anyway !!
 		//setTimeout('update()', 2000);
 		checkCmd();
